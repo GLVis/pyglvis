@@ -1,0 +1,2 @@
+recursive-include pyglvis/static *.*
+include jupyter-glvis.json
