@@ -6,6 +6,6 @@ def _jupyter_nbextension_paths():
     return [{
         'section': 'notebook',
         'src': 'static',
-        'dest': 'jupyter-glvis',
-        'require': 'jupyter-glvis/extension'
+        'dest': 'glvis-jupyter',
+        'require': 'glvis-jupyter/extension'
     }]

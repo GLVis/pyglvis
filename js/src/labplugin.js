@@ -1,14 +1,14 @@
-var jupyter_glvis = require('./index');
+var glvis_jupyter = require('./index');
 var base = require('@jupyter-widgets/base');
 
 module.exports = {
-  id: 'jupyter-glvis',
+  id: 'glvis-jupyter',
   requires: [base.IJupyterWidgetRegistry],
   activate: function(app, widgets) {
       widgets.registerWidget({
-          name: 'jupyter-glvis',
-          version: jupyter_glvis.version,
-          exports: jupyter_glvis
+          name: 'glvis-jupyter',
+          version: glvis_jupyter.version,
+          exports: glvis_jupyter
       });
   },
   autoStart: true

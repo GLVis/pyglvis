@@ -5,7 +5,7 @@
 // Some static assets may be required by the custom widget javascript. The base
 // url for the notebook is not known at build time and is therefore computed
 // dynamically.
-__webpack_public_path__ = document.querySelector('body').getAttribute('data-base-url') + 'nbextensions/jupyter-glvis';
+__webpack_public_path__ = document.querySelector('body').getAttribute('data-base-url') + 'nbextensions/glvis-jupyter';
 
 
 // Configure requirejs
@@ -13,7 +13,7 @@ if (window.require) {
     window.require.config({
         map: {
             "*" : {
-                "jupyter-glvis": "nbextensions/jupyter-glvis/index",
+                "glvis-jupyter": "nbextensions/glvis-jupyter/index",
             }
         }
     });

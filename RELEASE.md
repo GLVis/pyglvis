@@ -18,7 +18,7 @@ git push
 git push --tags
 ```
 
-## Releasing a new version of jupyter-glvis on NPM:
+## Releasing a new version of glvis-jupyter on NPM:
 
 Update model/view version in widget.js
 

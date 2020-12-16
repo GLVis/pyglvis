@@ -110,6 +110,7 @@ class NPM(Command):
         if self.should_run_npm_install():
             log.info("Installing build dependencies with npm.  This may take a while...")
             npmName = self.get_npm_name()
+            print("npm=" + npmName)
             check_call([npmName, 'install'], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
             os.utime(self.node_modules, None)
 
@@ -135,13 +136,13 @@ setup_args = {
     'long_description': LONG_DESCRIPTION,
     'include_package_data': True,
     'data_files': [
-        ('share/jupyter/nbextensions/jupyter-glvis', [
+        ('share/jupyter/nbextensions/glvis-jupyter', [
             'pyglvis/static/extension.js',
             'pyglvis/static/index.js',
             'pyglvis/static/index.js.map',
             'pyglvis/static/package.json'
         ]),
-        ('etc/jupyter/nbconfig/notebook.d', ['jupyter-glvis.json'])
+        ('etc/jupyter/nbconfig/notebook.d', ['glvis-jupyter.json'])
     ],
     'install_requires': [
         'ipywidgets>=7.0.0',
@@ -171,8 +172,6 @@ setup_args = {
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Topic :: Multimedia :: Graphics',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

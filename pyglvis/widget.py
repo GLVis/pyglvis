@@ -11,11 +11,11 @@ with open(os.path.join(here, "static", "package.json")) as f:
 @widgets.register
 class GlvisWidget(widgets.DOMWidget):
     _model_name = Unicode('GlvisModel').tag(sync=True)
-    _model_module = Unicode('jupyter-glvis').tag(sync=True)
+    _model_module = Unicode('glvis-jupyter').tag(sync=True)
     _model_module_version = Unicode('^' + version).tag(sync=True)
 
     _view_name = Unicode('GlvisView').tag(sync=True)
-    _view_module = Unicode('jupyter-glvis').tag(sync=True)
+    _view_module = Unicode('glvis-jupyter').tag(sync=True)
     _view_module_version = Unicode('^' + version).tag(sync=True)
 
     _data_str = Unicode().tag(sync=True)

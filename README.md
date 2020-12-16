@@ -28,14 +28,14 @@ pip install pyglvis
 jupyter nbextension enable --py pyglvis
 # jupyter lab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
-jupyter labextension install jupyter-glvis
+jupyter labextension install glvis-jupyter
 ```
 
 
 For a development installation (requires npm):
 
 ```bash
-git clone https://github.com/glvis/glvis-widget.git
+git clone https://github.com/glvis/pyglvis.git
 cd pyglvis
 pip install -e .
 jupyter nbextension install --py --symlink --sys-prefix pyglvis
@@ -44,3 +44,6 @@ jupyter nbextension enable --py --sys-prefix pyglvis
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 jupyter labextension link ./js
 ```
+
+
+rm -rf js/node_modules
