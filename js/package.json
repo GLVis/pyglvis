@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "Jupyter Widget for glvis-js",
   "author": "",
-  "license": "LGPL-2.1",
+  "license": "BSD-3",
   "main": "src/index.js",
   "repository": {
     "type": "git",
