@@ -1,13 +1,12 @@
-Jupyter GLVis Widget Frontend
-=============================
+# Jupyter GLVis Widget Frontend
 
 Interactive finite element visualization widget for the Jupyter Notebook,
 built from [GLVis](https://glvis.org).
 
-Package Install
----------------
+## Package Install
 
 **Prerequisites**
+
 - [node](http://nodejs.org/)
 
 ```bash
