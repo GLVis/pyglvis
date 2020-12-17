@@ -3,9 +3,11 @@ from .widget import GlvisWidget
 
 
 def _jupyter_nbextension_paths():
-    return [{
-        'section': 'notebook',
-        'src': 'static',
-        'dest': 'glvis-jupyter',
-        'require': 'glvis-jupyter/extension'
-    }]
+    return [
+        {
+            "section": "notebook",
+            "src": "static",
+            "dest": "glvis-jupyter",
+            "require": "glvis-jupyter/extension",
+        }
+    ]
