@@ -18,7 +18,7 @@ var GLVisModel = widgets.DOMWidgetModel.extend({
 var GLVisView = widgets.DOMWidgetView.extend({
   render: function () {
     this.div = document.createElement("div");
-    this.div.setAttribute("id", glvis.guid());
+    this.div.setAttribute("id", glvis.rand_id());
     this.div.setAttribute("tabindex", "0");
     this.el.append(this.div);
 
@@ -32,10 +32,10 @@ var GLVisView = widgets.DOMWidgetView.extend({
     const data = this.model.get("_data_str");
     const new_stream = this.model.get("_new_stream");
     if (new_stream) {
-      glvis.display(type, data);
+      this.glv.display(type, data);
     }
     else {
-      glvis.update(type, data);
+      this.glv.update(type, data);
     }
   },
 });

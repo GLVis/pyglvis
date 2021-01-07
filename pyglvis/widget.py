@@ -3,9 +3,12 @@ import json
 import os
 from traitlets import Unicode, Int, Bool
 
+"""
 here = os.path.dirname(__file__)
-with open(os.path.join(here, "static", "package.json")) as f:
+with open(os.path.join(here, "nbextension", "package.json")) as f:
     version = json.load(f)["version"]
+    """
+version = "0.1.0"
 
 
 @widgets.register

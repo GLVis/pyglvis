@@ -6,7 +6,7 @@ var version = require("./package.json").version;
 // stored in a separate local variable.
 var rules = [{ test: /\.css$/, use: ["style-loader", "css-loader"] }];
 
-var static_dir = path.resolve(__dirname, "..", "pyglvis", "static");
+//var static_dir = path.resolve(__dirname, "..", "pyglvis", "static");
 
 // copy package.json so we can grab its version in pyglvis
 //fs.copySync("./package.json", path.join(static_dir, "package.json"));
@@ -15,16 +15,16 @@ var resolve =  {
 }
 
 module.exports = [
-    {// Notebook extension
+    { // Notebook extension
         entry: './src/extension.js',
         output: {
             filename: 'extension.js',
             path: path.resolve(__dirname, '..', 'pyglvis', 'nbextension'),
-            libraryTarget: 'amd'
+            libraryTarget: 'amd',
+            publicPath: '',
         },
-        resolve: resolve
     },
-    {// glvis-jupyter bundle for the classic notebook
+    { // glvis-jupyter bundle for the classic notebook
         entry: './src/notebook.js',
         output: {
             filename: 'index.js',
@@ -37,9 +37,8 @@ module.exports = [
             rules: rules
         },
         externals: ['@jupyter-widgets/base'],
-        resolve: resolve
     },
-    {// glvis-jupyter bundle for unpkg
+    { // glvis-jupyter bundle for unpkg
         entry: './src/embed.js',
         output: {
             filename: 'index.js',
@@ -52,6 +51,5 @@ module.exports = [
             rules: rules
         },
         externals: ['@jupyter-widgets/base'],
-        resolve: resolve
     }
 ];

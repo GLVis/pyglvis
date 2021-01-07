@@ -24,25 +24,26 @@
     "mfem"
   ],
   "scripts": {
-    "build": "webpack && npm run build:labextension",
+    "build": "webpack",
+    "build3": "webpack && npm run build:labextension",
     "build:labextension": "jupyter labextension build .",
-    "prepublish": "npm run clean && npm run build",
     "clean": "rimraf dist/ && rimraf ../pyglvis/labextension/ && rimraf ../pyglvis/nbextension",
+    "prepublishOnly": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@jupyterlab/builder": "^3.0.0",
     "install": "^0.13.0",
-    "npm": "^6.14.5",
+    "npm": "^7.3.0",
     "prettier": "2.2.1",
     "rimraf": "^2.6.3",
     "webpack": "^5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^4.3.1"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^1.1 || ^2 || ^3",
     "lodash": "^4.17.19",
-    "glvis": "/Users/tom/Documents/glvis-js"
+    "glvis": "/Users/stitt4/Documents/glvis-js"
   },
   "jupyterlab": {
     "extension": "src/jupyterlab-plugin",

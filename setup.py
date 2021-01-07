@@ -72,9 +72,9 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "pyglvis", "static", "extension.js"),
-        os.path.join(here, "pyglvis", "static", "index.js"),
-        os.path.join(here, "pyglvis", "static", "package.json"),
+        os.path.join(here, "pyglvis", "nbextension", "extension.js"),
+        os.path.join(here, "pyglvis", "nbextension", "index.js"),
+        #os.path.join(here, "pyglvis", "nbextension", "package.json"),
     ]
 
     def initialize_options(self):
@@ -152,10 +152,10 @@ setup_args = {
         (
             "share/jupyter/nbextensions/glvis-jupyter",
             [
-                "pyglvis/static/extension.js",
-                "pyglvis/static/index.js",
-                "pyglvis/static/index.js.map",
-                "pyglvis/static/package.json",
+                "pyglvis/nbextension/extension.js",
+                "pyglvis/nbextension/index.js",
+                "pyglvis/nbextension/index.js.map",
+                #"pyglvis/nbextension/package.json",
             ],
         ),
         ("etc/jupyter/nbconfig/notebook.d", ["glvis-jupyter.json"]),
