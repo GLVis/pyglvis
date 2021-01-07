@@ -1,4 +1,4 @@
-var fs = require("fs-extra");
+//var fs = require("fs-extra");
 var path = require("path");
 var version = require("./package.json").version;
 
@@ -9,70 +9,49 @@ var rules = [{ test: /\.css$/, use: ["style-loader", "css-loader"] }];
 var static_dir = path.resolve(__dirname, "..", "pyglvis", "static");
 
 // copy package.json so we can grab its version in pyglvis
-fs.copySync("./package.json", path.join(static_dir, "package.json"));
+//fs.copySync("./package.json", path.join(static_dir, "package.json"));
+var resolve =  {
+    extensions: ['.js']
+}
 
 module.exports = [
-  {
-    // Notebook extension
-    //
-    // This bundle only contains the part of the JavaScript that is run on
-    // load of the notebook. This section generally only performs
-    // some configuration for requirejs, and provides the legacy
-    // "load_ipython_extension" function which is required for any notebook
-    // extension.
-    //
-    entry: "./src/extension.js",
-    output: {
-      filename: "extension.js",
-      path: static_dir,
-      libraryTarget: "amd",
+    {// Notebook extension
+        entry: './src/extension.js',
+        output: {
+            filename: 'extension.js',
+            path: path.resolve(__dirname, '..', 'pyglvis', 'nbextension'),
+            libraryTarget: 'amd'
+        },
+        resolve: resolve
     },
-  },
-  {
-    // Bundle for the notebook containing the custom widget views and models
-    //
-    // This bundle contains the implementation for the custom widget views and
-    // custom widget.
-    // It must be an amd module
-    //
-    entry: "./src/index.js",
-    output: {
-      filename: "index.js",
-      path: static_dir,
-      libraryTarget: "amd",
+    {// glvis-jupyter bundle for the classic notebook
+        entry: './src/notebook.js',
+        output: {
+            filename: 'index.js',
+            path: path.resolve(__dirname, '..', 'pyglvis', 'nbextension'),
+            libraryTarget: 'amd',
+            publicPath: '',
+        },
+        devtool: 'source-map',
+        module: {
+            rules: rules
+        },
+        externals: ['@jupyter-widgets/base'],
+        resolve: resolve
     },
-    devtool: "source-map",
-    module: {
-      rules: rules,
-    },
-    externals: ["@jupyter-widgets/base", "fs"],
-  },
-  {
-    // Embeddable glvis-jupyter bundle
-    //
-    // This bundle is generally almost identical to the notebook bundle
-    // containing the custom widget views and models.
-    //
-    // The only difference is in the configuration of the webpack public path
-    // for the static assets.
-    //
-    // It will be automatically distributed by unpkg to work with the static
-    // widget embedder.
-    //
-    // The target bundle is always `dist/index.js`, which is the path required
-    // by the custom widget embedder.
-    //
-    entry: "./src/embed.js",
-    output: {
-      filename: "index.js",
-      path: path.resolve(__dirname, "dist"),
-      libraryTarget: "amd",
-      publicPath: "https://unpkg.com/glvis-jupyter@" + version + "/dist/",
-    },
-    devtool: "source-map",
-    module: {
-      rules: rules,
-    },
-    externals: ["@jupyter-widgets/base", "fs"],
-  },
+    {// glvis-jupyter bundle for unpkg
+        entry: './src/embed.js',
+        output: {
+            filename: 'index.js',
+            path: path.resolve(__dirname, 'dist'),
+            libraryTarget: 'amd',
+            publicPath: 'https://unpkg.com/glvis-jupyter@' + version + '/dist/'
+        },
+        devtool: 'source-map',
+        module: {
+            rules: rules
+        },
+        externals: ['@jupyter-widgets/base'],
+        resolve: resolve
+    }
 ];

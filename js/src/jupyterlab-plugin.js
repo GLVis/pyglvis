@@ -2,7 +2,7 @@ var glvis_jupyter = require("./index");
 var base = require("@jupyter-widgets/base");
 
 module.exports = {
-  id: "glvis-jupyter",
+  id: "jupyter.extensions.glvis-jupyter",
   requires: [base.IJupyterWidgetRegistry],
   activate: function (app, widgets) {
     widgets.registerWidget({
