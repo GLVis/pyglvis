@@ -43,7 +43,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^1.1 || ^2 || ^3",
     "lodash": "^4.17.19",
-    "glvis": "/Users/stitt4/Documents/glvis-js"
+    "glvis": "^0.1.0"
   },
   "jupyterlab": {
     "extension": "src/jupyterlab-plugin",

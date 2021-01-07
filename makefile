@@ -17,3 +17,6 @@ BLACK ?= black
 style:
 	@which $(NPX) > /dev/null && (cd js && $(NPX) prettier -w .) || echo "fatal: $(NPX) isn't available, please install npm to format JavaScript."
 	@which $(BLACK) > /dev/null && $(BLACK) . || echo "fatal: $(BLACK) isn't available, please install black to format Python."
+
+clean:
+	rm -rf js/node_modules js/dist pyglvis/nbextension
