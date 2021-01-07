@@ -3,6 +3,7 @@ import json
 import os
 from traitlets import Unicode, Int, Bool
 
+# TODO: TMS
 """
 here = os.path.dirname(__file__)
 with open(os.path.join(here, "nbextension", "package.json")) as f:

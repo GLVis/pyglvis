@@ -9,23 +9,21 @@ from setuptools.command.egg_info import egg_info
 from subprocess import check_call
 import sys
 
+name = "pyglvis"
+long_description = "Jupyter Widget for GLVis"
+
 here = os.path.dirname(os.path.abspath(__file__))
 node_root = os.path.join(here, "js")
 is_repo = os.path.exists(os.path.join(here, ".git"))
 
-npm_path = os.pathsep.join(
-    [
-        os.path.join(node_root, "node_modules", ".bin"),
-        os.environ.get("PATH", os.defpath),
-    ]
-)
+npm_path = os.pathsep.join([
+    os.path.join(node_root, "node_modules", ".bin"),
+    os.environ.get("PATH", os.defpath),
+])
 
 log.set_verbosity(log.DEBUG)
 log.info("setup.py entered")
 log.info("$PATH=%s" % os.environ["PATH"])
-
-LONG_DESCRIPTION = "Jupyter Widget for GLVis"
-
 
 def js_prerelease(command, strict=False):
     """decorator for building minified js/css prior to another command"""
@@ -83,55 +81,32 @@ class NPM(Command):
     def finalize_options(self):
         pass
 
-    def get_npm_name(self):
-        npmName = "npm"
-        if platform.system() == "Windows":
-            npmName = "npm.cmd"
-
-        return npmName
-
     def has_npm(self):
-        npmName = self.get_npm_name()
         try:
-            check_call([npmName, "--version"])
+            check_call(["npm", "--version"])
             return True
         except Exception:
             return False
 
-    def should_run_npm_install(self):
-        node_modules_exists = os.path.exists(self.node_modules)
-        return self.has_npm() and not node_modules_exists
-
     def run(self):
-        has_npm = self.has_npm()
-        if not has_npm:
+        if not self.has_npm():
             log.error(
                 "`npm` unavailable.  If you're running this command using sudo, make sure"
                 "`npm` is available to sudo"
             )
+            return
 
         env = os.environ.copy()
         env["PATH"] = npm_path
 
-        if self.should_run_npm_install():
-            log.info(
-                "Installing build dependencies with npm.  This may take a while..."
-            )
-            npmName = self.get_npm_name()
-            print("npm=" + npmName)
-            check_call(
-                [npmName, "install"],
-                cwd=node_root,
-                stdout=sys.stdout,
-                stderr=sys.stderr,
-            )
-            os.utime(self.node_modules, None)
+        log.info("Installing build dependencies with npm.  This may take a while...")
+        check_call(["npm", "install"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
+        check_call(["npx", "webpack"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
+        os.utime(self.node_modules, None)
 
         for t in self.targets:
             if not os.path.exists(t):
                 msg = "Missing file: %s" % t
-                if not has_npm:
-                    msg += "\nnpm is required to build a development version of a widget extension"
                 raise ValueError(msg)
 
         # update package data in case this created new files
@@ -143,10 +118,10 @@ with open(os.path.join(here, "pyglvis", "_version.py")) as f:
     exec(f.read(), {}, version_ns)
 
 setup_args = {
-    "name": "pyglvis",
+    "name": name,
     "version": version_ns["__version__"],
-    "description": "Jupyter Widget for GLVis",
-    "long_description": LONG_DESCRIPTION,
+    "description": "Jupyter Widget using glvis-js",
+    "long_description": long_description,
     "include_package_data": True,
     "data_files": [
         (
@@ -162,6 +137,7 @@ setup_args = {
     ],
     "install_requires": [
         "ipywidgets>=7.0.0",
+        "traittypes>=0.2.1"
     ],
     "packages": find_packages(),
     "zip_safe": False,
@@ -171,22 +147,14 @@ setup_args = {
         "sdist": js_prerelease(sdist, strict=True),
         "jsdeps": NPM,
     },
-    "author": "glvis",
-    "author_email": "glvis@llnl.gov",
+    "author": "",
+    "author_email": "",
     "url": "https://github.com/glvis/pyglvis",
     "keywords": ["ipython", "jupyter", "widgets", "glvis", "mfem"],
     "classifiers": [
-        "Development Status :: 4 - Beta",
         "Framework :: IPython",
-        "Intended Audience :: Developers",
-        "Intended Audience :: Science/Research",
         "Topic :: Multimedia :: Graphics",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
     ],
 }
 
