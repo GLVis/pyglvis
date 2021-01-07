@@ -1,7 +1,7 @@
 import ipywidgets as widgets
 import json
 import os
-from traitlets import Unicode, Int
+from traitlets import Unicode, Int, Bool
 
 here = os.path.dirname(__file__)
 with open(os.path.join(here, "static", "package.json")) as f:
@@ -9,12 +9,12 @@ with open(os.path.join(here, "static", "package.json")) as f:
 
 
 @widgets.register
-class GlvisWidget(widgets.DOMWidget):
-    _model_name = Unicode("GlvisModel").tag(sync=True)
+class GLVisWidget(widgets.DOMWidget):
+    _model_name = Unicode("GLVisModel").tag(sync=True)
     _model_module = Unicode("glvis-jupyter").tag(sync=True)
     _model_module_version = Unicode("^" + version).tag(sync=True)
 
-    _view_name = Unicode("GlvisView").tag(sync=True)
+    _view_name = Unicode("GLVisView").tag(sync=True)
     _view_module = Unicode("glvis-jupyter").tag(sync=True)
     _view_module_version = Unicode("^" + version).tag(sync=True)
 
@@ -22,17 +22,22 @@ class GlvisWidget(widgets.DOMWidget):
     _data_type = Unicode().tag(sync=True)
     _width = Int().tag(sync=True)
     _height = Int().tag(sync=True)
+    _new_stream = Bool().tag(sync=True)
 
-    def _set_state(self, stream):
+    def _set_stream(self, stream, new=True):
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
-        self._data_str = stream[offset + 1 :]
+        self._data_str = stream[offset + 1:]
+        self._new_stream = new
 
     def __init__(self, stream, width=640, height=480, *args, **kwargs):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
         self._width = width
         self._height = height
-        self._set_state(stream)
+        self._set_stream(stream)
+
+    def new_vis(self, stream):
+        self._set_stream(stream)
 
     def update(self, stream):
-        self._set_state(stream)
+        self._set_stream(stream, False)
