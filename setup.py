@@ -27,14 +27,17 @@ here = os.path.dirname(os.path.abspath(__file__))
 node_root = os.path.join(here, "js")
 is_repo = os.path.exists(os.path.join(here, ".git"))
 
-npm_path = os.pathsep.join([
-    os.path.join(node_root, "node_modules", ".bin"),
-    os.environ.get("PATH", os.defpath),
-])
+npm_path = os.pathsep.join(
+    [
+        os.path.join(node_root, "node_modules", ".bin"),
+        os.environ.get("PATH", os.defpath),
+    ]
+)
 
 log.set_verbosity(log.DEBUG)
 log.info("setup.py entered")
 log.info("$PATH=%s" % os.environ["PATH"])
+
 
 def js_prerelease(command, strict=False):
     """decorator for building minified js/css prior to another command"""
@@ -83,7 +86,7 @@ class NPM(Command):
     targets = [
         os.path.join(here, "glvis", "nbextension", "extension.js"),
         os.path.join(here, "glvis", "nbextension", "index.js"),
-        #os.path.join(here, "glvis", "nbextension", "package.json"),
+        # os.path.join(here, "glvis", "nbextension", "package.json"),
     ]
 
     def initialize_options(self):
@@ -111,8 +114,12 @@ class NPM(Command):
         env["PATH"] = npm_path
 
         log.info("Installing build dependencies with npm.  This may take a while...")
-        check_call(["npm", "install"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
-        check_call(["npx", "webpack"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
+        check_call(
+            ["npm", "install"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr
+        )
+        check_call(
+            ["npx", "webpack"], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr
+        )
         os.utime(self.node_modules, None)
 
         for t in self.targets:
@@ -141,15 +148,12 @@ setup_args = {
                 "glvis/nbextension/extension.js",
                 "glvis/nbextension/index.js",
                 "glvis/nbextension/index.js.map",
-                #"glvis/nbextension/package.json",
+                # "glvis/nbextension/package.json",
             ],
         ),
         ("etc/jupyter/nbconfig/notebook.d", ["glvis-jupyter.json"]),
     ],
-    "install_requires": [
-        "ipywidgets>=7.0.0",
-        "traittypes>=0.2.1"
-    ],
+    "install_requires": ["ipywidgets>=7.0.0", "traittypes>=0.2.1"],
     "packages": find_packages(),
     "zip_safe": False,
     "cmdclass": {

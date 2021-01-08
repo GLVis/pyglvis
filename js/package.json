@@ -41,7 +41,7 @@
     "webpack-cli": "^4.3.1"
   },
   "dependencies": {
-    "@jupyter-widgets/base": "^1.1 || ^2 || ^3",
+    "@jupyter-widgets/base": "^2 || ^3",
     "lodash": "^4.17.19",
     "glvis": "^0.1.0"
   },

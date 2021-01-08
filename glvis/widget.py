@@ -42,7 +42,7 @@ class GLVisWidget(widgets.DOMWidget):
     def _set_stream(self, stream, new=True):
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
-        self._data_str = stream[offset + 1:]
+        self._data_str = stream[offset + 1 :]
         self._new_stream = new
 
     def __init__(self, stream, width=640, height=480, *args, **kwargs):

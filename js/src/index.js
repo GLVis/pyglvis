@@ -31,7 +31,7 @@ var GLVisView = widgets.DOMWidgetView.extend({
     this.visualize();
   },
 
-  resize: function() {
+  resize: function () {
     const width = this.model.get("_width");
     const height = this.model.get("_height");
     this.glv.setSize(width, height);
@@ -40,12 +40,11 @@ var GLVisView = widgets.DOMWidgetView.extend({
   visualize: function () {
     const type = this.model.get("_data_type");
     const data = this.model.get("_data_str");
-    
+
     const new_stream = this.model.get("_new_stream");
     if (new_stream) {
       this.glv.display(type, data);
-    }
-    else {
+    } else {
       this.glv.update(type, data);
     }
   },
@@ -54,4 +53,5 @@ var GLVisView = widgets.DOMWidgetView.extend({
 module.exports = {
   GLVisModel: GLVisModel,
   GLVisView: GLVisView,
+  version: version,
 };
