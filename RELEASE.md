@@ -1,4 +1,4 @@
-## Releasing a new version of pyglvis on PyPI:
+## Releasing a new version of glvis on PyPI:
 
 Update \_version.py (set release version, remove 'dev')
 Update model/view version in widget.py 

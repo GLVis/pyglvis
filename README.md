@@ -3,8 +3,8 @@
 ## Usage
 
 ```python
-from pyglvis import GLVisWidget
-GlvisWidget(stream[, width=640, height=480])
+from glvis import GLVisWidget
+GLVisWidget(stream[, width=640, height=480])
 # or assign if you want to update later
 g = GLVisWidget(stream)
 # run a cell with `g` to show it
@@ -18,19 +18,17 @@ g.set_size(width, height)
 
 ## Installation
 
-To install with pip:
-
 ```bash
 pip install glvis
 ```
 
-After installing it's good to verify that the notebook extensions are actually working
+After installing it's good to verify that the notebook extensions are actually working:
 
 ```
 jupyter nbextension list
 ```
 
-Should give you something like:
+Which should look something like:
 
 ```
 Known nbextensions:
@@ -62,7 +60,8 @@ jupyter labextension install glvis-jupyter
 ### Development
 
 Development installation requires npm, webpack, and webpack-cli and hasn't been tested much.
-After you have npm installed, install webpack and webpack-cli (globally) with:
+After you have npm installed, install webpack and webpack-cli (globally) with (TODO is this actually
+needed?):
 
 ```shell
 npm install -g webpack webpack-cli
