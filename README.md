@@ -20,6 +20,7 @@ g.set_size(width, height)
 
 ```bash
 pip install glvis
+jupyter nbextension enable --py glvis
 ```
 
 After installing it's good to verify that the notebook extensions are actually working:
@@ -32,10 +33,11 @@ Which should look something like:
 
 ```
 Known nbextensions:
-  config dir: .../nbconfig
+  config dir: path/to/nbconfig
     notebook section
       glvis-jupyter/extension  enabled
       - Validating: OK
+  <possibly a different config dir>
       jupyter-js-widgets/extension  enabled
       - Validating: OK
 ```
@@ -50,10 +52,9 @@ jupyter nbextension enable --user --py widgetsnbextension
 ```
 
 Jupyter Lab requires another set of install commands:
-TODO test, only for Lab 2.
 
 ```
-jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 jupyter labextension install glvis-jupyter
 ```
 
@@ -80,10 +81,16 @@ jupyter nbextension enable --py --sys-prefix glvis
 
 # jupyter lab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
+# I believe you need node in the path Lab uses for this to work, I see an extension load error
+# in a context where I don't have it:
+# Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+#   lab/api/extensions?1610138347763
+# Which is just a python stacktrace, ending with:
+#   raise ValueError(msg)\nValueError: Please install Node.js and npm before continuing installation. 
 jupyter labextension link ./js
 ```
 
-If you run into errors related to npm that aren't helpful my suggestion would be to:
+If you run into errors related to node/npm that aren't helpful my suggestion would be to:
 
 ```shell
 cd pyglvis
