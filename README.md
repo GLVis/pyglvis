@@ -23,8 +23,12 @@ To install with pip:
 ```bash
 pip install pyglvis
 
+# TODO: these shouldn't be needed
 # notebook
 jupyter nbextension enable --py pyglvis
+# you may also need to enable ipywidgets
+# the `--sys-prefix` should only be needed if installing in a virtualenv
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
 
 # jupyter lab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager

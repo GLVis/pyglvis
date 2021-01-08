@@ -1,2 +1,2 @@
-recursive-include pyglvis/static *.*
+recursive-include pyglvis/nbextension *.*
 include glvis-jupyter.json
