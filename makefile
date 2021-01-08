@@ -19,4 +19,4 @@ style:
 	@which $(BLACK) > /dev/null && $(BLACK) . || echo "fatal: $(BLACK) isn't available, please install black to format Python."
 
 clean:
-	rm -rf js/node_modules js/dist pyglvis/nbextension pyglvis.egg-info
+	rm -rf js/node_modules js/dist glvis/nbextension glvis.egg-info

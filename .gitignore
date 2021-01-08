@@ -1,4 +1,4 @@
 .ipynb_checkpoints
-pyglvis/nbextension
+glvis/nbextension
 js/node_modules
 *.ipynb

@@ -27,7 +27,7 @@
     "build": "webpack",
     "build3": "webpack && npm run build:labextension",
     "build:labextension": "jupyter labextension build .",
-    "clean": "rimraf dist/ && rimraf ../pyglvis/labextension/ && rimraf ../pyglvis/nbextension",
+    "clean": "rimraf dist/ && rimraf ../glvis/labextension/ && rimraf ../glvis/nbextension",
     "prepublishOnly": "npm run clean && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -6,20 +6,13 @@ var version = require("./package.json").version;
 // stored in a separate local variable.
 var rules = [{ test: /\.css$/, use: ["style-loader", "css-loader"] }];
 
-//var static_dir = path.resolve(__dirname, "..", "pyglvis", "static");
-
-// copy package.json so we can grab its version in pyglvis
-//fs.copySync("./package.json", path.join(static_dir, "package.json"));
-var resolve =  {
-    extensions: ['.js']
-}
-
+// TODO: copy package.json so we can grab its version in glvis
 module.exports = [
     { // Notebook extension
         entry: './src/extension.js',
         output: {
             filename: 'extension.js',
-            path: path.resolve(__dirname, '..', 'pyglvis', 'nbextension'),
+            path: path.resolve(__dirname, '..', 'glvis', 'nbextension'),
             libraryTarget: 'amd',
             publicPath: '',
         },
@@ -28,7 +21,7 @@ module.exports = [
         entry: './src/notebook.js',
         output: {
             filename: 'index.js',
-            path: path.resolve(__dirname, '..', 'pyglvis', 'nbextension'),
+            path: path.resolve(__dirname, '..', 'glvis', 'nbextension'),
             libraryTarget: 'amd',
             publicPath: '',
         },

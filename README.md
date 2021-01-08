@@ -1,7 +1,4 @@
-# pyglvis
-
-Interactive finite element visualization widget for the Jupyter Notebook,
-built from [GLVis](https://glvis.org).
+# Interactive Visualization Widget build on glvis-js
 
 ## Usage
 
@@ -12,8 +9,11 @@ GlvisWidget(stream[, width=640, height=480])
 g = GLVisWidget(stream)
 # run a cell with `g` to show it
 g
-# updates will update the original widget
+
+# other methods
+g.new_vis(stream)
 g.update(stream)
+g.set_size(width, height)
 ```
 
 ## Installation
@@ -21,7 +21,7 @@ g.update(stream)
 To install with pip:
 
 ```bash
-pip install pyglvis
+pip install glvis
 ```
 
 After installing it's good to verify that the notebook extensions are actually working
@@ -45,8 +45,8 @@ Known nbextensions:
 If you do not see both `glvis-jupyter` and `jupyter-js-widgets` then try the following:
 
 ```
-jupyter nbextension install --user --py pyglvis
-jupyter nbextension enable --user --py pyglvis
+jupyter nbextension install --user --py glvis
+jupyter nbextension enable --user --py glvis
 jupyter nbextension install --user --py widgetsnbextension
 jupyter nbextension enable --user --py widgetsnbextension
 ```
@@ -68,7 +68,7 @@ After you have npm installed, install webpack and webpack-cli (globally) with:
 npm install -g webpack webpack-cli
 ```
 
-Then you should be able to install pyglvis:
+Then you should be able to install glvis:
 
 ```bash
 git clone https://github.com/glvis/pyglvis.git
@@ -76,8 +76,8 @@ cd pyglvis
 pip install -e .
 
 # notebook
-jupyter nbextension install --py --symlink --sys-prefix pyglvis
-jupyter nbextension enable --py --sys-prefix pyglvis
+jupyter nbextension install --py --symlink --sys-prefix glvis
+jupyter nbextension enable --py --sys-prefix glvis
 
 # jupyter lab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
