@@ -22,15 +22,39 @@ To install with pip:
 
 ```bash
 pip install pyglvis
+```
 
-# TODO: these shouldn't be needed
-# notebook
-jupyter nbextension enable --py pyglvis
-# you may also need to enable ipywidgets
-# the `--sys-prefix` should only be needed if installing in a virtualenv
-jupyter nbextension enable --py widgetsnbextension --sys-prefix
+After installing it's good to verify that the notebook extensions are actually working
 
-# jupyter lab
+```
+jupyter nbextension list
+```
+
+Should give you something like:
+
+```
+Known nbextensions:
+  config dir: .../nbconfig
+    notebook section
+      glvis-jupyter/extension  enabled
+      - Validating: OK
+      jupyter-js-widgets/extension  enabled
+      - Validating: OK
+```
+
+If you do not see both `glvis-jupyter` and `jupyter-js-widgets` then try the following:
+
+```
+jupyter nbextension install --user --py pyglvis
+jupyter nbextension enable --user --py pyglvis
+jupyter nbextension install --user --py widgetsnbextension
+jupyter nbextension enable --user --py widgetsnbextension
+```
+
+Jupyter Lab requires another set of install commands:
+TODO test, only for Lab 2.
+
+```
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
 jupyter labextension install glvis-jupyter
 ```

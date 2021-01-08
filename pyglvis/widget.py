@@ -45,3 +45,7 @@ class GLVisWidget(widgets.DOMWidget):
 
     def update(self, stream):
         self._set_stream(stream, False)
+
+    def set_size(self, width, height):
+        self._width = width
+        self._height = height
