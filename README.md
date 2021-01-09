@@ -11,9 +11,15 @@ g = GLVisWidget(stream)
 g
 
 # other methods
-g.new_vis(stream)
+g.display(stream)
 g.update(stream)
 g.set_size(width, height)
+```
+
+If `PyMFEM` is installed you can also use `Mesh` and `GridFunction` arguemnts:
+
+```python
+GLVisWidget(Mesh[, GridFunction])
 ```
 
 ## Installation
