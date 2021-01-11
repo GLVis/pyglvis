@@ -19,8 +19,8 @@ g
 The `data` object and be one of:
 
 - a `str`, in the format of `*.saved` files
-- a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem) 
-- a `(Mesh, GridFunction)` tuple, defined in [PyMFEM](https://github.com/mfem/pymfem) 
+- a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem)
+- a `(Mesh, GridFunction)` tuple, defined in [PyMFEM](https://github.com/mfem/pymfem)
 
 [PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
 
@@ -31,10 +31,16 @@ visualization:
 # show a new Mesh/GridFunction, resets keys
 g.display(data)
 # show an updated visualization with the same `Mesh` and `GridFunction`
-# dimensions, perserves keys
+# dimensions, preserves keys
 g.update(data)
 # change the image size
 g.set_size(width, height)
+```
+
+See the [examples](examples/) directory for additional examples. To test those locally, start a Jupyter notebook server with
+
+```shell
+jupyter notebook
 ```
 
 ## Installation
@@ -43,7 +49,7 @@ The GLVis Jupyter widget can be simply installed with `pip`:
 
 ```bash
 pip install glvis
-``` 
+```
 
 It order for the installation to be useful you must enable the extension for one or both
 of the [Classic Notebook](https://jupyter-notebook.readthedocs.io/en/stable/) and
@@ -121,7 +127,7 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 # Failed to load resource: the server responded with a status of 500 (Internal Server Error)
 #   lab/api/extensions?1610138347763
 # Which is just a python stacktrace, ending with:
-#   raise ValueError(msg)\nValueError: Please install Node.js and npm before continuing installation. 
+#   raise ValueError(msg)\nValueError: Please install Node.js and npm before continuing installation.
 jupyter labextension link ./js
 ```
 
