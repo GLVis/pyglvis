@@ -22,7 +22,7 @@ The `data` object and be one of:
 - a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem) 
 - a `(Mesh, GridFunction)` tuple, defined in [PyMFEM](https://github.com/mfem/pymfem) 
 
-PyMFEM[PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
+[PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
 
 
 Once you have a `GLVisWidget` object there are a few methods that can used to update the
@@ -30,7 +30,8 @@ visualization:
 ```python
 # show a new Mesh/GridFunction, resets keys
 g.display(data)
-# show an updated visualization with the same `Mesh` and `GridFunction` dimensions, perserves keys
+# show an updated visualization with the same `Mesh` and `GridFunction`
+# dimensions, perserves keys
 g.update(data)
 # change the image size
 g.set_size(width, height)
@@ -43,6 +44,10 @@ The GLVis Jupyter widget can be simply installed with `pip`:
 ```bash
 pip install glvis
 ``` 
+
+It order for the installation to be useful you must enable the extension for one or both
+of the [Classic Notebook](https://jupyter-notebook.readthedocs.io/en/stable/) and
+[Jupyter Lab](https://jupyterlab.readthedocs.io/en/stable/), see the next two sections:
 
 ### Jupyter Notebook
 
@@ -91,7 +96,7 @@ jupyter labextension install glvis-jupyter
 
 ## Development
 
-Development installation requires `npm`Then you should be able to install glvis as follows
+Development installation requires `npm`, after installing:
 
 ```bash
 git clone https://github.com/glvis/pyglvis.git
