@@ -13,85 +13,71 @@ import ipywidgets as widgets
 import json
 import os
 from traitlets import Unicode, Int, Bool
+from ._version import extension_version
 
 try:
-    import mfem
     from mfem._ser.mesh import Mesh
     from mfem._ser.gridfunc import GridFunction
 except ImportError:
-    mfem = None
-    pass
+    Mesh = object
+    GridFunction = object
 
 
-# TODO: TMS
-"""
-here = os.path.dirname(__file__)
-with open(os.path.join(here, "nbextension", "package.json")) as f:
-    version = json.load(f)["version"]
-    """
-version = "0.1.0"
+def to_stream(mesh: Mesh, gf: GridFunction = None) -> str:
+    stream = "solution\n" if gf is not None else "mesh\n"
+    temp_file = "temp.saved"
+    mesh.Print(temp_file)
+    with open(temp_file, "r") as f:
+        stream += f.read()
+    if gf is not None:
+        stream += "\n"
+        gf.Save(temp_file)
+        with open(temp_file, "r") as f:
+            stream += f.read()
+    return stream
 
 
 @widgets.register
 class GLVisWidget(widgets.DOMWidget):
     _model_name = Unicode("GLVisModel").tag(sync=True)
     _model_module = Unicode("glvis-jupyter").tag(sync=True)
-    _model_module_version = Unicode("^" + version).tag(sync=True)
+    _model_module_version = Unicode("^" + extension_version).tag(sync=True)
 
     _view_name = Unicode("GLVisView").tag(sync=True)
     _view_module = Unicode("glvis-jupyter").tag(sync=True)
-    _view_module_version = Unicode("^" + version).tag(sync=True)
+    _view_module_version = Unicode("^" + extension_version).tag(sync=True)
 
     _data_str = Unicode().tag(sync=True)
     _data_type = Unicode().tag(sync=True)
     _width = Int().tag(sync=True)
     _height = Int().tag(sync=True)
-    _new_stream = Bool().tag(sync=True)
+    _is_new_stream = Bool().tag(sync=True)
 
-    def _display_stream(self, stream, new=True):
+    def _sync(self, data, is_new=True):
+        if isinstance(data, str):
+            stream = data
+        elif isinstance(data, tuple):
+            stream = to_stream(*data)
+        elif isinstance(data, Mesh):
+            stream = to_stream(data)
+        else:
+            raise TypeError
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
         self._data_str = stream[offset + 1 :]
-        self._new_stream = new
+        self._is_new_stream = is_new
 
-    def __init__(self, stream, width=640, height=480, *args, **kwargs):
+    def __init__(self, data, width=640, height=480, *args, **kwargs):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
-        set_size(width, height)
-        self._set_stream(stream)
+        self.set_size(width, height)
+        self._sync(data, is_new=True)
 
-    def display(self, stream):
-        self._display_stream(stream)
+    def display(self, data):
+        self._sync(data, is_new=True)
 
-    def update(self, stream):
-        self._display_stream(stream, False)
+    def update(self, data):
+        self._sync(data, is_new=False)
 
     def set_size(self, width, height):
         self._width = width
         self._height = height
-
-    if mfem:
-        # TODO: validate args, updates to MFEM so we don't need a temp file
-        def _to_stream(self, mesh, gf=None):
-            stream = "solution\n" if gf is not None else "mesh\n"
-            temp_file = "temp.saved"
-            mesh.Print(temp_file)
-            with open(temp_file, "r") as f:
-                stream += f.read()
-            if gf is not None:
-                stream += "\n"
-                gf.Save(temp_file)
-                with open(temp_file, "r") as f:
-                    stream += f.read()
-            return stream
-
-        def __init__(self, mesh, gf=None, width=640, height=480, *args, **kwargs):
-            widgets.DOMWidget.__init__(self, *args, **kwargs)
-            self.set_size(width, height)
-            self.display2(mesh, gf)
-
-        # TODO: one display and update that checks arg types
-        def display2(self, mesh, gf):
-            self.display(self._to_stream(mesh, gf))
-
-        def update2(self, mesh, gf):
-            self.update(self._to_stream(mesh, gf))

@@ -52,8 +52,8 @@ var GLVisView = widgets.DOMWidgetView.extend({
     const type = this.model.get("_data_type");
     const data = this.model.get("_data_str");
 
-    const new_stream = this.model.get("_new_stream");
-    if (new_stream) {
+    const is_new_stream = this.model.get("_is_new_stream");
+    if (is_new_stream) {
       this.glv.display(type, data);
     } else {
       this.glv.update(type, data);
