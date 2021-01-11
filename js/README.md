@@ -1,4 +1,4 @@
-# Jupyter Widget Frontend implementation for glvis-js
+# Jupyter Widget Frontend Implementation for glvis-js
 
 Interactive finite element visualization widget for the Jupyter Notebook,
 built with [GLVis](https://glvis.org).
