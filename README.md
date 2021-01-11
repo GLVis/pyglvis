@@ -1,48 +1,64 @@
 # Interactive GLVis Jupyter Widget
 
-This repository contains a [Jupyter](https://jupyter.org/) widget for the [GLVis](https://glvis.org/) finite element visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) JavaScript/WebAsembly library.
+This repository contains a [Jupyter](https://jupyter.org/) widget for the [GLVis](https://glvis.org/) finite element
+visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) JavaScript/WebAssembly library.
 
 ## Usage
 
 ```python
 from glvis import GLVisWidget
 
-GLVisWidget(stream[, width=640, height=480])
+GLVisWidget(data[, width=640, height=480])
 
 # or assign if you want to update later
-g = GLVisWidget(stream)
+g = GLVisWidget(data)
 # run a cell with `g` to show it
 g
-
-# other methods
-g.display(stream)
-g.update(stream)
-g.set_size(width, height)
 ```
 
-If [PyMFEM](https://github.com/mfem/pymfem) is installed  (`pip install mfem --no-binary mfem`) you can also use the `Mesh` and `GridFunction` arguments.
+The `data` object and be one of:
 
+- a `str`, in the format of `*.saved` files
+- a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem) 
+- a `(Mesh, GridFunction)` tuple, defined in [PyMFEM](https://github.com/mfem/pymfem) 
+
+PyMFEM[PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
+
+
+Once you have a `GLVisWidget` object there are a few methods that can used to update the
+visualization:
 ```python
-GLVisWidget(Mesh[, GridFunction])
+# show a new Mesh/GridFunction, resets keys
+g.display(data)
+# show an updated visualization with the same `Mesh` and `GridFunction` dimensions, perserves keys
+g.update(data)
+# change the image size
+g.set_size(width, height)
 ```
 
 ## Installation
 
-The GLVis Jupyter widget can be simply installed with `pip` and enabled with `jupyter nbextension enable`.
-
+The GLVis Jupyter widget can be simply installed with `pip`:
 
 ```bash
 pip install glvis
+``` 
+
+### Jupyter Notebook
+
+To use the widget with the basic Notebook enable it with `jupyter nbextension enable`:
+
+```bash
 jupyter nbextension enable --py glvis
 ```
 
-After installing you can verify that the notebook extensions are working with
+After enabling the extension you can verify you're good to go with:
 
 ```
 jupyter nbextension list
 ```
 
-The output should be something like
+The output should be something like:
 
 ```
 Known nbextensions:
@@ -64,6 +80,8 @@ jupyter nbextension install --user --py widgetsnbextension
 jupyter nbextension enable --user --py widgetsnbextension
 ```
 
+### Jupyter Lab
+
 [JupyterLab](https://jupyterlab.readthedocs.io) requires another set of install commands:
 
 ```
@@ -73,24 +91,25 @@ jupyter labextension install glvis-jupyter
 
 ## Development
 
-Development installation requires `npm`, `webpack`, and `webpack-cli` and has not been tested extensively. After `npm` is installed, install `webpack` and `webpack-cli` (globally) with **(TODO is this actually needed?)**:
-
-```shell
-npm install -g webpack webpack-cli
-```
-
-Then you should be able to install glvis as follows
+Development installation requires `npm`Then you should be able to install glvis as follows
 
 ```bash
 git clone https://github.com/glvis/pyglvis.git
 cd pyglvis
 pip install -e .
+```
 
-# notebook
+
+### Developing in Jupyter Notebook
+
+```
 jupyter nbextension install --py --symlink --sys-prefix glvis
 jupyter nbextension enable --py --sys-prefix glvis
+```
 
-# jupyter lab
+### Developing in Jupyter Lab
+
+```
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 # I believe you need node in the path Lab uses for this to work, I see an extension load error
 # in a context where I don't have it:
@@ -101,20 +120,39 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 jupyter labextension link ./js
 ```
 
+
+### Troubleshooting
+
 If you run into errors related to node/npm that aren't helpful try:
 
 ```shell
 cd pyglvis
 make clean
 cd js
+# fix errors in these steps, run `make -C .. clean` each time
 npm install
 npx webpack
 ```
 
-## Releasing a new version of glvis on PyPI:
+## Releasing
 
-- Update `_version.py` (set release version, remove `dev`)
-- Update `model/view` version in `widget.py`
+### Releasing a new version of glvis-jupyter on NPM:
+
+- Update model/view version in `package.json`
+
+```console
+# clean out the `dist` and `node_modules` directories
+git clean -fdx
+npm install
+npm publish
+```
+
+### Releasing a new version of glvis on PyPI:
+
+- Update `_version.py`
+   - set release version
+   - remove `dev`
+   - Update `extension_version` to match `package.json`
 - `git add` the `_version.py` file and `git commit`
 
 ```bash
@@ -129,15 +167,4 @@ git tag -a X.X.X -m 'comment'
 git add and git commit
 git push
 git push --tags
-```
-
-## Releasing a new version of glvis-jupyter on NPM:
-
-Update model/view version in `widget.js`
-
-```console
-# clean out the `dist` and `node_modules` directories
-git clean -fdx
-npm install
-npm publish
 ```
