@@ -39,7 +39,7 @@ def to_stream(mesh: Mesh, gf: GridFunction = None) -> str:
 
 
 @widgets.register
-class GLVisWidget(widgets.DOMWidget):
+class glvis(widgets.DOMWidget):
     _model_name = Unicode("GLVisModel").tag(sync=True)
     _model_module = Unicode("glvis-jupyter").tag(sync=True)
     _model_module_version = Unicode("^" + extension_version).tag(sync=True)
