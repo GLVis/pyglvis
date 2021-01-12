@@ -10,6 +10,7 @@
 # CONTRIBUTING.md for details.
 
 import ipywidgets as widgets
+from IPython.display import display as ipydisplay
 import json
 import os
 from traitlets import Unicode, Int, Bool
@@ -81,3 +82,6 @@ class GLVisWidget(widgets.DOMWidget):
     def set_size(self, width, height):
         self._width = width
         self._height = height
+
+    def show(self):
+        ipydisplay(self)

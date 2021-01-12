@@ -10,7 +10,7 @@
 # CONTRIBUTING.md for details.
 
 from ._version import version_info, __version__
-from .widget import GLVisWidget
+from .widget import GLVisWidget, to_stream
 
 
 def _jupyter_nbextension_paths():
