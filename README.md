@@ -35,6 +35,9 @@ g.display(data)
 g.update(data)
 # change the image size
 g.set_size(width, height)
+# force the widget to render. if the widget isn't the last statement in a cell it
+# will not be shown without this. see ex9.ipynb
+g.show()
 ```
 
 See the [examples](examples/) directory for additional examples. To test those locally, start a Jupyter notebook server with
