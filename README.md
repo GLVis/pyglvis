@@ -130,7 +130,8 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 # Failed to load resource: the server responded with a status of 500 (Internal Server Error)
 #   lab/api/extensions?1610138347763
 # Which is just a python stacktrace, ending with:
-#   raise ValueError(msg)\nValueError: Please install Node.js and npm before continuing installation.
+#   raise ValueError(msg)
+#   ValueError: Please install Node.js and npm before continuing installation.
 jupyter labextension link ./js
 ```
 
