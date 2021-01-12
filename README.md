@@ -6,12 +6,12 @@ visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) Ja
 ## Usage
 
 ```python
-from glvis import GLVisWidget
+from glvis import glvis
 
-GLVisWidget(data[, width=640, height=480])
+glvis(data[, width=640, height=480])
 
 # or assign if you want to update later
-g = GLVisWidget(data)
+g = glvis(data)
 # run a cell with `g` to show it
 g
 ```
@@ -25,7 +25,7 @@ The `data` object and be one of:
 [PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
 
 
-Once you have a `GLVisWidget` object there are a few methods that can used to update the
+Once you have a `glvis` object there are a few methods that can used to update the
 visualization:
 ```python
 # show a new Mesh/GridFunction, resets keys
