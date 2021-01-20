@@ -1,1 +1,2 @@
--i https://test.pypi.org/simple mfem
+-i https://test.pypi.org/simple
+mfem==4.2.1.30
