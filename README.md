@@ -156,7 +156,9 @@ npx webpack
 
 ### Releasing a new version of glvis-jupyter on NPM:
 
-- Update model/view version in `package.json`
+- Update the required version of `glvis` in `js/package.json`
+
+- Update the version in `js/package.json`
 
 ```console
 # clean out the `dist` and `node_modules` directories
@@ -167,22 +169,19 @@ npm publish
 
 ### Releasing a new version of glvis on PyPI:
 
-- Update `_version.py`
-   - set release version
-   - remove `dev`
-   - Update `extension_version` to match `package.json`
-- `git add` the `_version.py` file and `git commit`
+- Update `glvis/_version.py`
+   - Set release version
+   - Update `extension_version` to match `js/package.json`
 
-```bash
-python setup.py sdist upload
-python setup.py bdist_wheel upload
-git tag -a X.X.X -m 'comment'
+- `git add` and `git commit` changes
+  - `glvis/_version.py`, `js/package.json`, and `js/package-lock.js`
 ```
 
-- Update `_version.py` (add `dev` and increment minor):
+You will need [twine](https://pypi.org/project/twine/) to publish to PyPI, install with `pip`.
 
 ```bash
-git add and git commit
-git push
+python setup.py sdist bdist_wheel
+twine upload dist/*
+git tag -a X.X.X -m 'comment'
 git push --tags
 ```

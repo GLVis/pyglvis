@@ -1,6 +1,6 @@
 {
   "name": "glvis-jupyter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Jupyter Widget using glvis-js",
   "author": "",
   "license": "BSD-3-Clause",
@@ -43,7 +43,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^2 || ^3",
     "lodash": "^4.17.19",
-    "glvis": "^0.1.0"
+    "glvis": "^0.1.1"
   },
   "jupyterlab": {
     "extension": "src/jupyterlab-plugin",
