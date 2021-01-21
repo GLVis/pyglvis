@@ -53,6 +53,7 @@ class glvis(widgets.DOMWidget):
     _is_new_stream = Bool().tag(sync=True)
 
     def _sync(self, data, is_new=True):
+        self._is_new_stream = is_new
         if isinstance(data, str):
             stream = data
         elif isinstance(data, tuple):
@@ -64,7 +65,6 @@ class glvis(widgets.DOMWidget):
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
         self._data_str = stream[offset + 1:]
-        self._is_new_stream = is_new
 
     def __init__(self, data, width=640, height=480, *args, **kwargs):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
