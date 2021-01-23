@@ -1,0 +1,5 @@
+numpy
+scipy
+# can't do this without also getting numpy and scipy from test pypi...
+#-i https://test.pypi.org/simple
+#mfem==4.2.1.30

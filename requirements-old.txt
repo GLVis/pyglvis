@@ -1,5 +1,0 @@
-# numpy will still use https://test-files.pythonhosted.org, which is an old version
-numpy
-# temporary mfem requirements, fix the source and version so we get the prebuilt libmfem
--i https://test.pypi.org/simple
-mfem==4.2.1.30
