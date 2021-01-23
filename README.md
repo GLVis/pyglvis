@@ -1,7 +1,10 @@
 # Interactive GLVis Jupyter Widget
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
+`basic.ipynb:`[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
 
+`ex1.ipynb:`[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex1.ipynb)
+
+`ex9.ipynb:`[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex9.ipynb)
 
 This repository contains a [Jupyter](https://jupyter.org/) widget for the [GLVis](https://glvis.org/) finite element
 visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) JavaScript/WebAssembly library.
