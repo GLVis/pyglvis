@@ -2,6 +2,7 @@
 
 <!-- Badges generated at https://mybinder.readthedocs.io/en/latest/howto/badges.html -->
 [![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
+[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fplot.ipynb)
 [![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex1.ipynb)
 [![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex9.ipynb)
 
@@ -98,6 +99,7 @@ jupyter nbextension enable --user --py glvis
 jupyter nbextension install --user --py widgetsnbextension
 jupyter nbextension enable --user --py widgetsnbextension
 ```
+You may also need to run these if you have upgraded to a newer version of the GLVis Jupyter widget.
 
 ### Jupyter Lab
 
@@ -177,7 +179,7 @@ npm publish
 
 - `git add` and `git commit` changes
   - `glvis/_version.py`, `js/package.json`, and `js/package-lock.js`
-```
+
 
 You will need [twine](https://pypi.org/project/twine/) to publish to PyPI, install with `pip`.
 
