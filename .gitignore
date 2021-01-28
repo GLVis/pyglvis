@@ -2,3 +2,4 @@
 glvis/nbextension
 js/node_modules
 *.ipynb
+*.saved
