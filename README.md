@@ -48,7 +48,7 @@ g.show()
 
 See the [examples](examples/) directory for additional examples. To test those locally, start a Jupyter notebook server with
 
-```shell
+```
 jupyter notebook
 ```
 
@@ -56,7 +56,7 @@ jupyter notebook
 
 The GLVis Jupyter widget can be simply installed with `pip`:
 
-```bash
+```
 pip install glvis
 ```
 
@@ -68,7 +68,7 @@ of the [Classic Notebook](https://jupyter-notebook.readthedocs.io/en/stable/) an
 
 To use the widget with the basic Notebook enable it with `jupyter nbextension enable`:
 
-```bash
+```
 jupyter nbextension enable --py glvis
 ```
 
@@ -114,7 +114,7 @@ jupyter labextension install glvis-jupyter
 
 Development installation requires `npm`, after installing:
 
-```bash
+```
 git clone https://github.com/glvis/pyglvis.git
 cd pyglvis
 pip install -e .
@@ -130,7 +130,7 @@ jupyter nbextension enable --py --sys-prefix glvis
 
 ### Developing in Jupyter Lab
 
-```
+```bash
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 # I believe you need node in the path Lab uses for this to work, I see an extension load error
 # in a context where I don't have it:
@@ -147,7 +147,7 @@ jupyter labextension link ./js
 
 If you run into errors related to node/npm that aren't helpful try:
 
-```shell
+```bash
 cd pyglvis
 make clean
 cd js
@@ -164,7 +164,7 @@ npx webpack
 
 - Update the version in `js/package.json`
 
-```console
+```bash
 # clean out the `dist` and `node_modules` directories
 git clean -fdx
 npm install
@@ -183,7 +183,7 @@ npm publish
 
 You will need [twine](https://pypi.org/project/twine/) to publish to PyPI, install with `pip`.
 
-```bash
+```
 python setup.py sdist bdist_wheel
 twine upload dist/*
 git tag -a X.X.X -m 'comment'
