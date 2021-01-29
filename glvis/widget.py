@@ -64,7 +64,7 @@ class glvis(widgets.DOMWidget):
             raise TypeError
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
-        self._data_str = stream[offset + 1:]
+        self._data_str = stream[offset + 1 :]
 
     def __init__(self, data, width=640, height=480, *args, **kwargs):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
@@ -89,5 +89,8 @@ class glvis(widgets.DOMWidget):
 
         glvis(**other.serialize())
         """
-        return {"data": self._data_type + "\n" + self._data_str,
-                "width": self._width, "height": self._height}
+        return {
+            "data": self._data_type + "\n" + self._data_str,
+            "width": self._width,
+            "height": self._height,
+        }
