@@ -2,7 +2,7 @@
 
 <!-- Badges generated at https://mybinder.readthedocs.io/en/latest/howto/badges.html -->
 [![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
-[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/adf2ba89ec25caa3cbc4b65b9fa1f51eb209d94b?filepath=examples%2Fplot.ipynb)
+[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/0cacaf4b3dd3470d971a2f8b69b7669398f070b1?filepath=examples%2Fplot.ipynb)
 [![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex1.ipynb)
 [![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/8ffcc6f66efbcb7e3e373b106293d41dab340d1f?filepath=examples%2Fex9.ipynb)
 
