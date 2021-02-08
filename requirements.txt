@@ -1,5 +1,5 @@
+# These requirements are _not_ required by glvis but may be needed for the examples.
+# They are required for binder.
 numpy
 scipy
-# can't do this without also getting numpy and scipy from test pypi...
-#-i https://test.pypi.org/simple
-#mfem==4.2.1.30
+mfem>=4.2.0.7
