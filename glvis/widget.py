@@ -9,9 +9,11 @@
 # terms of the BSD-3 license. We welcome feedback and contributions, see file
 # CONTRIBUTING.md for details.
 
+import io
 import ipywidgets as widgets
 from IPython.display import display as ipydisplay
 from traitlets import Unicode, Int, Bool
+from typing import Union, Tuple
 from ._version import extension_version
 
 try:
@@ -21,19 +23,16 @@ except ImportError:
     Mesh = object
     GridFunction = object
 
+Stream = Union[Tuple[Mesh, GridFunction], Mesh, str]
+
 
 def to_stream(mesh: Mesh, gf: GridFunction = None) -> str:
-    stream = "solution\n" if gf is not None else "mesh\n"
-    temp_file = "temp.saved"
-    mesh.Print(temp_file)
-    with open(temp_file, "r") as f:
-        stream += f.read()
-    if gf is not None:
-        stream += "\n"
-        gf.Save(temp_file)
-        with open(temp_file, "r") as f:
-            stream += f.read()
-    return stream
+    sio = io.StringIO()
+    sio.write("solution\n" if gf is not None else "mesh\n")
+    mesh.WriteToStream(sio)
+    if gf:
+        gf.WriteToStream(sio)
+    return sio.getvalue()
 
 
 @widgets.register
@@ -52,7 +51,7 @@ class glvis(widgets.DOMWidget):
     _height = Int().tag(sync=True)
     _is_new_stream = Bool().tag(sync=True)
 
-    def _sync(self, data, is_new=True):
+    def _sync(self, data: Stream, is_new: bool = True):
         self._is_new_stream = is_new
         if isinstance(data, str):
             stream = data
@@ -64,20 +63,20 @@ class glvis(widgets.DOMWidget):
             raise TypeError
         offset = stream.find("\n")
         self._data_type = stream[0:offset]
-        self._data_str = stream[offset + 1 :]
+        self._data_str = stream[offset + 1:]
 
-    def __init__(self, data, width=640, height=480, *args, **kwargs):
+    def __init__(self, data: Stream, width: int = 640, height: int = 480, *args, **kwargs):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
         self.set_size(width, height)
         self._sync(data, is_new=True)
 
-    def display(self, data):
+    def display(self, data: Stream):
         self._sync(data, is_new=True)
 
-    def update(self, data):
+    def update(self, data: Stream):
         self._sync(data, is_new=False)
 
-    def set_size(self, width, height):
+    def set_size(self, width: int, height: int):
         self._width = width
         self._height = height
 
