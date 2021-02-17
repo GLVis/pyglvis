@@ -3,3 +3,8 @@ glvis/nbextension
 js/node_modules
 *.ipynb
 *.saved
+*.mesh
+__pycache__
+*.egg-info
+js/dist
+build
