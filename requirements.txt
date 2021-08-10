@@ -2,4 +2,4 @@
 # They are required for binder.
 numpy
 scipy
-mfem>=4.2.0.8
+mfem>=4.3.0.0
