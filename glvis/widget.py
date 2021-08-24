@@ -72,7 +72,7 @@ class glvis(widgets.DOMWidget):
         self.set_size(width, height)
         self._sync(data, is_new=True)
 
-    def draw(self, data: Stream):
+    def plot(self, data: Stream):
         self._sync(data, is_new=True)
 
     def update(self, data: Stream):
