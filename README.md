@@ -35,7 +35,7 @@ Once you have a `glvis` object there are a few methods that can used to update t
 visualization:
 ```python
 # show a new Mesh/GridFunction, resets keys
-g.display(data)
+g.plot(data)
 # show an updated visualization with the same `Mesh` and `GridFunction`
 # dimensions, preserves keys
 g.update(data)
@@ -43,7 +43,7 @@ g.update(data)
 g.set_size(width, height)
 # force the widget to render. if the widget isn't the last statement in a cell it
 # will not be shown without this. see ex9.ipynb
-g.show()
+g.render()
 ```
 
 See the [examples](examples/) directory for additional examples. To test those locally, start a Jupyter notebook server with
