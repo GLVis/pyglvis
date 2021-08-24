@@ -32,27 +32,27 @@ var GLVisView = widgets.DOMWidgetView.extend({
     this.div.setAttribute("id", glvis.rand_id());
     this.div.setAttribute("tabindex", "0");
     this.el.append(this.div);
-    this.width = this.model.get("_width");
-    this.height = this.model.get("_height");
+    this.width = this.model.get("width");
+    this.height = this.model.get("height");
 
     this.glv = new glvis.State(this.div, this.width, this.height);
-    this.model.on("change:_data_str", this.visualize, this);
-    this.model.on("change:_height", this.resize, this);
-    this.model.on("change:_width", this.resize, this);
+    this.model.on("change:data_str", this.visualize, this);
+    this.model.on("change:height", this.resize, this);
+    this.model.on("change:width", this.resize, this);
     this.visualize();
   },
 
   resize: function () {
-    const width = this.model.get("_width");
-    const height = this.model.get("_height");
+    const width = this.model.get("width");
+    const height = this.model.get("height");
     this.glv.setSize(width, height);
   },
 
   visualize: function () {
-    const type = this.model.get("_data_type");
-    const data = this.model.get("_data_str");
+    const type = this.model.get("data_type");
+    const data = this.model.get("data_str");
 
-    const is_new_stream = this.model.get("_is_new_stream");
+    const is_new_stream = this.model.get("is_new_stream");
     if (is_new_stream) {
       this.glv.display(type, data);
     } else {
