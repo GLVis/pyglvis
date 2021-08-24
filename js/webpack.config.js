@@ -11,6 +11,7 @@ module.exports = [
   {
     // Notebook extension
     entry: "./src/extension.js",
+    mode: "production",
     output: {
       filename: "extension.js",
       path: path.resolve(__dirname, "..", "glvis", "nbextension"),
@@ -21,6 +22,7 @@ module.exports = [
   {
     // glvis-jupyter bundle for the classic notebook
     entry: "./src/notebook.js",
+    mode: "production",
     output: {
       filename: "index.js",
       path: path.resolve(__dirname, "..", "glvis", "nbextension"),
@@ -36,6 +38,7 @@ module.exports = [
   {
     // glvis-jupyter bundle for unpkg
     entry: "./src/embed.js",
+    mode: "production",
     output: {
       filename: "index.js",
       path: path.resolve(__dirname, "dist"),

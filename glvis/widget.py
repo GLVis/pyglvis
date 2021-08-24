@@ -45,14 +45,14 @@ class glvis(widgets.DOMWidget):
     _view_module = Unicode("glvis-jupyter").tag(sync=True)
     _view_module_version = Unicode("^" + extension_version).tag(sync=True)
 
-    _data_str = Unicode().tag(sync=True)
-    _data_type = Unicode().tag(sync=True)
-    _width = Int().tag(sync=True)
-    _height = Int().tag(sync=True)
-    _is_new_stream = Bool().tag(sync=True)
+    data_str = Unicode().tag(sync=True)
+    data_type = Unicode().tag(sync=True)
+    width = Int().tag(sync=True)
+    height = Int().tag(sync=True)
+    is_new_stream = Bool().tag(sync=True)
 
     def _sync(self, data: Stream, is_new: bool = True):
-        self._is_new_stream = is_new
+        self.is_new_stream = is_new
         if isinstance(data, str):
             stream = data
         elif isinstance(data, tuple):
@@ -62,8 +62,8 @@ class glvis(widgets.DOMWidget):
         else:
             raise TypeError
         offset = stream.find("\n")
-        self._data_type = stream[0:offset]
-        self._data_str = stream[offset + 1 :]
+        self.data_type = stream[0:offset]
+        self.data_str = stream[offset + 1:]
 
     def __init__(
         self, data: Stream, width: int = 640, height: int = 480, *args, **kwargs
@@ -72,17 +72,17 @@ class glvis(widgets.DOMWidget):
         self.set_size(width, height)
         self._sync(data, is_new=True)
 
-    def display(self, data: Stream):
+    def draw(self, data: Stream):
         self._sync(data, is_new=True)
 
     def update(self, data: Stream):
         self._sync(data, is_new=False)
 
     def set_size(self, width: int, height: int):
-        self._width = width
-        self._height = height
+        self.width = width
+        self.height = height
 
-    def show(self):
+    def render(self):
         ipydisplay(self)
 
     def serialize(self):
@@ -91,7 +91,7 @@ class glvis(widgets.DOMWidget):
         glvis(**other.serialize())
         """
         return {
-            "data": self._data_type + "\n" + self._data_str,
-            "width": self._width,
-            "height": self._height,
+            "data": self.data_type + "\n" + self.data_str,
+            "width": self.width,
+            "height": self.height,
         }
