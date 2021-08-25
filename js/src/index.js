@@ -27,7 +27,7 @@ var GLVisModel = widgets.DOMWidgetModel.extend({
 });
 
 var GLVisView = widgets.DOMWidgetView.extend({
-  render: function () {
+  render: function() {
     this.div = document.createElement("div");
     this.div.setAttribute("id", glvis.rand_id());
     this.div.setAttribute("tabindex", "0");
@@ -36,19 +36,26 @@ var GLVisView = widgets.DOMWidgetView.extend({
     this.height = this.model.get("height");
 
     this.glv = new glvis.State(this.div, this.width, this.height);
-    this.model.on("change:data_str", this.visualize, this);
-    this.model.on("change:height", this.resize, this);
-    this.model.on("change:width", this.resize, this);
-    this.visualize();
+    this.model.on("change:data_str", this.plot, this);
+    this.model.on("change:height", this.set_size, this);
+    this.model.on("change:width", this.set_size, this);
+    this.model.on('msg:custom', this.handle_message, this);
+    this.plot();
   },
 
-  resize: function () {
+  handle_message: function(msg, buffers) {
+    if (msg.type === "screenshot") {
+      this.glv.saveScreenshot(msg.name);
+    }
+  },
+
+  set_size: function() {
     const width = this.model.get("width");
     const height = this.model.get("height");
     this.glv.setSize(width, height);
   },
 
-  visualize: function () {
+  plot: function() {
     const type = this.model.get("data_type");
     const data = this.model.get("data_str");
 
