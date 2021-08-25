@@ -85,6 +85,9 @@ class glvis(widgets.DOMWidget):
     def render(self):
         ipydisplay(self)
 
+    def screenshot(self, name):
+        self.send({"type": "screenshot", "name": name})
+
     def serialize(self):
         """Return dict that can be used to construct a copy of this instance
 
