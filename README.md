@@ -112,14 +112,27 @@ jupyter labextension install glvis-jupyter
 
 ## Development
 
-Development installation requires `npm`, after installing:
+Development installation requires `npm`.
+
+If you want to test a new version of `glvis`:
+
+1. Bump the version in _pyglvis/js/package.json_ and _glvis-js/package.json_
+2. `npm install path/to/glvis-js`
+
+
+Each time you update stuff in _pyglvis/js/src_:
+
+1. `npm install`
+2. `npx webpack`
+
+
+Once:
 
 ```
 git clone https://github.com/glvis/pyglvis.git
 cd pyglvis
 pip install -e .
 ```
-
 
 ### Developing in Jupyter Notebook
 

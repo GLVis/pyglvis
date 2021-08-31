@@ -15,6 +15,7 @@ from IPython.display import display as ipydisplay
 from traitlets import Unicode, Int, Bool
 from typing import Union, Tuple
 from ._version import extension_version
+import base64
 
 try:
     from mfem._ser.mesh import Mesh
@@ -65,12 +66,23 @@ class glvis(widgets.DOMWidget):
         self.data_type = stream[0:offset]
         self.data_str = stream[offset + 1:]
 
+    def _on_msg(self, _, content, buffers):
+        if content.get("type", "") == "screenshot":
+            data = content.get("b64", "")
+            name = content.get("name", "glvis.png")
+            if not data:
+                print(f"unable to save {name}, bad data")
+                return
+            with open(name, "wb") as f:
+                f.write(base64.decodebytes(data.encode('ascii')))
+
     def __init__(
         self, data: Stream, width: int = 640, height: int = 480, *args, **kwargs
     ):
         widgets.DOMWidget.__init__(self, *args, **kwargs)
         self.set_size(width, height)
         self._sync(data, is_new=True)
+        self.on_msg(self._on_msg)
 
     def plot(self, data: Stream):
         self._sync(data, is_new=True)
@@ -85,8 +97,8 @@ class glvis(widgets.DOMWidget):
     def render(self):
         ipydisplay(self)
 
-    def screenshot(self, name):
-        self.send({"type": "screenshot", "name": name})
+    def screenshot(self, name, use_web=False):
+        self.send({"type": "screenshot", "name": name, "use_web": use_web})
 
     def serialize(self):
         """Return dict that can be used to construct a copy of this instance
