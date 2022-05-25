@@ -14,6 +14,8 @@ var glvis = require("glvis");
 var lodash = require("lodash");
 var version = require("../package.json").version;
 
+var count = 0;
+
 var GLVisModel = widgets.DOMWidgetModel.extend({
   defaults: lodash.extend(widgets.DOMWidgetModel.prototype.defaults(), {
     _model_name: "GLVisModel",
