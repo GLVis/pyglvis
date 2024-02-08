@@ -20,9 +20,9 @@ function render({ model, el }) {
     const data = model.get("data_str");
     const is_new_stream = model.get("is_new_stream");
     if (is_new_stream) {
-      glv.display(type, data);
+      glv.display(data);
     } else {
-      glv.update(type, data);
+      glv.update(data);
     }
   }
 
