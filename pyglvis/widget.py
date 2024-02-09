@@ -41,7 +41,6 @@ class GlvisWidget(anywidget.AnyWidget):
     )
 
     data_str = Unicode('').tag(sync=True)
-    data_type = Unicode('').tag(sync=True)
     width = Int(640).tag(sync=True)
     height = Int(480).tag(sync=True)
     is_new_stream = Bool().tag(sync=True)

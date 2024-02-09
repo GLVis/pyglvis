@@ -16,7 +16,6 @@ function render({ model, el }) {
   }
 
   function plot() {
-    const type = model.get("data_type");
     const data = model.get("data_str");
     const is_new_stream = model.get("is_new_stream");
     if (is_new_stream) {
