@@ -1,10 +1,13 @@
 import anywidget
 import io
 from traitlets import Unicode, Int, Bool
+from pathlib import Path
 
 # Import file contents example: https://github.com/juba/pyobsplot/blob/main/src/pyobsplot/widget.py
-class GLVis(anywidget.AnyWidget):
-    _esm = anywidget._file_contents.FileContents("widget.js", start_thread=False)
+class glvis(anywidget.AnyWidget):
+    _esm = anywidget._file_contents.FileContents(
+        Path(__file__).parent / "widget.js", start_thread=False
+    )
 
     data_str = Unicode('').tag(sync=True)
     data_type = Unicode('').tag(sync=True)
