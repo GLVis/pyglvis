@@ -25,15 +25,6 @@ def data_to_str(data: Data) -> str:
         raise TypeError("Unknown data type")
     return sio.getvalue()
 
-
-def to_stream(mesh: Mesh, gf: GridFunction = None) -> str:
-    sio = io.StringIO()
-    sio.write("solution\n" if gf is not None else "mesh\n")
-    mesh.WriteToStream(sio)
-    if gf:
-        gf.WriteToStream(sio)
-    return sio.getvalue()
-
 # Import file contents example: https://github.com/juba/pyobsplot/blob/main/src/pyobsplot/widget.py
 class GlvisWidget(anywidget.AnyWidget):
     _esm = anywidget._file_contents.FileContents(
