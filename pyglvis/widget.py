@@ -3,6 +3,7 @@ import io
 from traitlets import Unicode, Int, Bool
 from typing import Union, Tuple
 from pathlib import Path
+import base64
 
 from mfem._ser.mesh import Mesh
 from mfem._ser.gridfunc import GridFunction
@@ -57,6 +58,16 @@ class Glvis:
 
     def update(self, data: Data):
         self._sync(data, is_new=False)
+
+    def _on_msg(self, _, content, buffers):
+        if content.get("type", "") == "screenshot":
+            data = content.get("b64", "")
+            name = content.get("name", "glvis.png")
+            if not data:
+                print(f"unable to save {name}, bad data")
+                return
+            with open(name, "wb") as f:
+                f.write(base64.decodebytes(data.encode('ascii')))
 
     def _sync(self, data: Data, is_new: bool = True):
         self._widget.is_new_stream = is_new
