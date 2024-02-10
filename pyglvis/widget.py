@@ -52,11 +52,11 @@ class Glvis:
         self._widget.width = width
         self._widget.height = height
 
-    # def plot(self, data: Data):
-    #     self._sync(data, is_new=True)
+    def plot(self, data: Data):
+        self._sync(data, is_new=True)
 
-    # def update(self, data: Data):
-    #     self._sync(data, is_new=False)
+    def update(self, data: Data):
+        self._sync(data, is_new=False)
 
     def _sync(self, data: Data, is_new: bool = True):
         self._widget.is_new_stream = is_new
