@@ -39,20 +39,25 @@ class GlvisWidget(anywidget.AnyWidget):
 
 # The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods 
 class Glvis:
-    widget = GlvisWidget()
-
-    # Automatically renders the widget - necessary because this is a wrapper class
-    def _repr_mimebundle_(self, *args, **kwargs):
-        return self.widget._repr_mimebundle_(*args, **kwargs)
-
     def __init__(self, data: Data, width: int = 640, height: int = 480):
+        self._widget = GlvisWidget()
         self.set_size(width, height)
         self._sync(data, is_new=True)
 
+    # Automatically renders the widget - necessary because this is a wrapper class
+    def _repr_mimebundle_(self, *args, **kwargs):
+        return self._widget._repr_mimebundle_(*args, **kwargs)
+
     def set_size(self, width: int, height: int):
-        self.widget.width = width
-        self.widget.height = height
+        self._widget.width = width
+        self._widget.height = height
+
+    # def plot(self, data: Data):
+    #     self._sync(data, is_new=True)
+
+    # def update(self, data: Data):
+    #     self._sync(data, is_new=False)
 
     def _sync(self, data: Data, is_new: bool = True):
-        self.widget.is_new_stream = is_new
-        self.widget.data_str = data_to_str(data)
+        self._widget.is_new_stream = is_new
+        self._widget.data_str = data_to_str(data)
