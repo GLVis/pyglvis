@@ -1,2 +1,0 @@
-recursive-include glvis/nbextension *.*
-include glvis-jupyter.json

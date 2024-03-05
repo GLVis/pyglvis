@@ -1,70 +1,64 @@
-# Copyright (c) 2010-2021, Lawrence Livermore National Security, LLC. Produced
-# at the Lawrence Livermore National Laboratory. All Rights reserved. See files
-# LICENSE and NOTICE for details. LLNL-CODE-443271.
-#
-# This file is part of the GLVis visualization tool and library. For more
-# information and source code availability see https://glvis.org.
-#
-# GLVis is free software; you can redistribute it and/or modify it under the
-# terms of the BSD-3 license. We welcome feedback and contributions, see file
-# CONTRIBUTING.md for details.
-
+import anywidget
 import io
-import ipywidgets as widgets
 from IPython.display import display as ipydisplay
 from traitlets import Unicode, Int, Bool
 from typing import Union, Tuple
-from ._version import extension_version
+from pathlib import Path
 import base64
 
-try:
-    from mfem._ser.mesh import Mesh
-    from mfem._ser.gridfunc import GridFunction
-except ImportError:
-    Mesh = object
-    GridFunction = object
+from mfem._ser.mesh import Mesh
+from mfem._ser.gridfunc import GridFunction
 
-Stream = Union[Tuple[Mesh, GridFunction], Mesh, str]
+Data = Union[Tuple[Mesh, GridFunction], Mesh, str]
 
+def data_to_str(data: Data) -> str:
+    if isinstance(data, str):
+        return data
 
-def to_stream(mesh: Mesh, gf: GridFunction = None) -> str:
     sio = io.StringIO()
-    sio.write("solution\n" if gf is not None else "mesh\n")
-    mesh.WriteToStream(sio)
-    if gf:
-        gf.WriteToStream(sio)
+    if isinstance(data, tuple):
+        sio.write("solution\n")
+        data[0].WriteToStream(sio)
+        data[1].WriteToStream(sio)
+    elif isinstance(data, Mesh):
+        sio.write("mesh\n")
+        data.WriteToStream(sio)
+    else:
+        raise TypeError("Unknown data type")
     return sio.getvalue()
 
+# Import file contents example: https://github.com/juba/pyobsplot/blob/main/src/pyobsplot/widget.py
+class GlvisWidget(anywidget.AnyWidget):
+    _esm = anywidget._file_contents.FileContents(
+        Path(__file__).parent / "widget.js", start_thread=False
+    )
 
-@widgets.register
-class glvis(widgets.DOMWidget):
-    _model_name = Unicode("GLVisModel").tag(sync=True)
-    _model_module = Unicode("glvis-jupyter").tag(sync=True)
-    _model_module_version = Unicode("^" + extension_version).tag(sync=True)
-
-    _view_name = Unicode("GLVisView").tag(sync=True)
-    _view_module = Unicode("glvis-jupyter").tag(sync=True)
-    _view_module_version = Unicode("^" + extension_version).tag(sync=True)
-
-    data_str = Unicode().tag(sync=True)
-    data_type = Unicode().tag(sync=True)
-    width = Int().tag(sync=True)
-    height = Int().tag(sync=True)
+    data_str = Unicode('').tag(sync=True)
+    width = Int(640).tag(sync=True)
+    height = Int(480).tag(sync=True)
     is_new_stream = Bool().tag(sync=True)
 
-    def _sync(self, data: Stream, is_new: bool = True):
-        self.is_new_stream = is_new
-        if isinstance(data, str):
-            stream = data
-        elif isinstance(data, tuple):
-            stream = to_stream(*data)
-        elif isinstance(data, Mesh):
-            stream = to_stream(data)
-        else:
-            raise TypeError
-        offset = stream.find("\n")
-        self.data_type = stream[0:offset]
-        self.data_str = stream[offset + 1:]
+
+# The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods 
+class glvis:
+    def __init__(self, data: Data, width: int = 640, height: int = 480, keys=None):
+        self._widget = GlvisWidget()
+        self.set_size(width, height)
+        self._sync(data, is_new=True, keys=keys)
+
+    # Automatically renders the widget - necessary because this is a wrapper class
+    def _repr_mimebundle_(self, *args, **kwargs):
+        return self._widget._repr_mimebundle_(*args, **kwargs)
+
+    def set_size(self, width: int, height: int):
+        self._widget.width = width
+        self._widget.height = height
+
+    def plot(self, data: Data, keys=None):
+        self._sync(data, is_new=True, keys=keys)
+
+    def update(self, data: Data, keys=None):
+        self._sync(data, is_new=False, keys=keys)
 
     def _on_msg(self, _, content, buffers):
         if content.get("type", "") == "screenshot":
@@ -76,37 +70,12 @@ class glvis(widgets.DOMWidget):
             with open(name, "wb") as f:
                 f.write(base64.decodebytes(data.encode('ascii')))
 
-    def __init__(
-        self, data: Stream, width: int = 640, height: int = 480, *args, **kwargs
-    ):
-        widgets.DOMWidget.__init__(self, *args, **kwargs)
-        self.set_size(width, height)
-        self._sync(data, is_new=True)
-        self.on_msg(self._on_msg)
-
-    def plot(self, data: Stream):
-        self._sync(data, is_new=True)
-
-    def update(self, data: Stream):
-        self._sync(data, is_new=False)
-
-    def set_size(self, width: int, height: int):
-        self.width = width
-        self.height = height
-
+    def _sync(self, data: Data, is_new: bool = True, keys=None):
+        self._widget.is_new_stream = is_new
+        data_string = data_to_str(data)
+        if keys is not None:
+            data_string += f"keys {keys}"
+        self._widget.data_str = data_string
+    
     def render(self):
         ipydisplay(self)
-
-    def screenshot(self, name, use_web=False):
-        self.send({"type": "screenshot", "name": name, "use_web": use_web})
-
-    def serialize(self):
-        """Return dict that can be used to construct a copy of this instance
-
-        glvis(**other.serialize())
-        """
-        return {
-            "data": self.data_type + "\n" + self.data_str,
-            "width": self.width,
-            "height": self.height,
-        }
