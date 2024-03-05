@@ -19,7 +19,7 @@ homepage = "https://glvis.org"
 repostiory = "https://github.com/glvis/pyglvis"
 
 [tool.hatch.version]
-path = "pyglvis/__about__.py"
+path = "glvis/__about__.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["pyglvis"]
+packages = ["glvis"]
