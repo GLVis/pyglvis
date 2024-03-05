@@ -39,11 +39,11 @@ class GlvisWidget(anywidget.AnyWidget):
 
 
 # The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods 
-class Glvis:
-    def __init__(self, data: Data, width: int = 640, height: int = 480):
+class glvis:
+    def __init__(self, data: Data, width: int = 640, height: int = 480, keys=None):
         self._widget = GlvisWidget()
         self.set_size(width, height)
-        self._sync(data, is_new=True)
+        self._sync(data, is_new=True, keys=keys)
 
     # Automatically renders the widget - necessary because this is a wrapper class
     def _repr_mimebundle_(self, *args, **kwargs):
@@ -53,11 +53,11 @@ class Glvis:
         self._widget.width = width
         self._widget.height = height
 
-    def plot(self, data: Data):
-        self._sync(data, is_new=True)
+    def plot(self, data: Data, keys=None):
+        self._sync(data, is_new=True, keys=keys)
 
-    def update(self, data: Data):
-        self._sync(data, is_new=False)
+    def update(self, data: Data, keys=None):
+        self._sync(data, is_new=False, keys=keys)
 
     def _on_msg(self, _, content, buffers):
         if content.get("type", "") == "screenshot":
@@ -69,6 +69,9 @@ class Glvis:
             with open(name, "wb") as f:
                 f.write(base64.decodebytes(data.encode('ascii')))
 
-    def _sync(self, data: Data, is_new: bool = True):
+    def _sync(self, data: Data, is_new: bool = True, keys=None):
         self._widget.is_new_stream = is_new
-        self._widget.data_str = data_to_str(data)
+        data_string = data_to_str(data)
+        if keys is not None:
+            data_string += f"keys {keys}"
+        self._widget.data_str = data_string
