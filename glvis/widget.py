@@ -1,5 +1,6 @@
 import anywidget
 import io
+from IPython.display import display as ipydisplay
 from traitlets import Unicode, Int, Bool
 from typing import Union, Tuple
 from pathlib import Path
@@ -75,3 +76,6 @@ class glvis:
         if keys is not None:
             data_string += f"keys {keys}"
         self._widget.data_str = data_string
+    
+    def render(self):
+        ipydisplay(self)
