@@ -1,10 +1,10 @@
 # Interactive GLVis Jupyter Widget
 
 <!-- Badges generated at https://mybinder.readthedocs.io/en/latest/howto/badges.html -->
-[![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
-[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fplot.ipynb)
-[![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex1.ipynb)
-[![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex9.ipynb)
+[![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fbasic.ipynb)
+[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fplot.ipynb)
+[![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fex1.ipynb)
+[![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fex9.ipynb)
 
 This repository contains a [Jupyter](https://jupyter.org/) widget for the [GLVis](https://glvis.org/) finite element
 visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) JavaScript/WebAssembly library.
@@ -14,7 +14,7 @@ visualization tool based on the [glvis-js](https://github.com/GLVis/glvis-js) Ja
 ```python
 from glvis import glvis
 
-glvis(data[, width=640, height=480])
+glvis(data, [width=640, height=480, keys=None])
 
 # or assign if you want to update later
 g = glvis(data)
@@ -22,7 +22,7 @@ g = glvis(data)
 g
 ```
 
-The `data` object and be one of:
+The `data` object can be one of:
 
 - a `str`, in the format of `*.saved` files
 - a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem)
