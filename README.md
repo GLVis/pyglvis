@@ -28,7 +28,7 @@ The `data` object can be one of:
 - a `Mesh`, defined in [PyMFEM](https://github.com/mfem/pymfem)
 - a `(Mesh, GridFunction)` tuple, defined in [PyMFEM](https://github.com/mfem/pymfem)
 
-[PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem --no-binary mfem`.
+[PyMFEM](https://github.com/mfem/pymfem) can be installed with `pip install mfem`.
 
 
 Once you have a `glvis` object there are a few methods that can used to update the
