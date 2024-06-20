@@ -73,11 +73,11 @@ glvis(data, keys='rljgac//0')
 ```
 This combination of keys would: `r` reset the view, `l` toggle the light, `j` toggle perspective, `g` toggle the background color to black (default is white), `a` show the bounding box, `c` show the colorbar, `//` zoom out twice, and `0` begin rotating around the z-axis:
 
-[INSERT GIF HERE]
+![pyglvis_preset_keys](https://github.com/GLVis/pyglvis/assets/27717785/de0e0a99-72ac-4a88-8369-708515600b09)
 
 Alternatively, keys can be typed directly into the widget after it has been created:
 
-[INSERT GIF HERE]
+![pyglvis_using_keys](https://github.com/GLVis/pyglvis/assets/27717785/625f4f06-8f99-4390-94d7-4d317fd11e7f)
 
 ### Other methods
 
