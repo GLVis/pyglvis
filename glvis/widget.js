@@ -1,14 +1,14 @@
 // _esm = """
 import glvis from "https://esm.sh/glvis";
-   
+
 function render({ model, el }) {
   let div = document.createElement("div");
   div.setAttribute("id", glvis.rand_id());
   div.setAttribute("tabindex", "0");
   el.append(div);
-  
+
   let width  = () => model.get("width");
-  let height = () => model.get("height");    
+  let height = () => model.get("height");
   let glv = new glvis.State(div, width(), height());
 
   function set_size() {
