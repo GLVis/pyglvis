@@ -74,7 +74,7 @@ class glvis:
         self._widget.is_new_stream = is_new
         data_string = data_to_str(data)
         if keys is not None:
-            data_string += f"keys {keys}"
+            data_string += f"{keys}"
         self._widget.data_str = data_string
     
     def render(self):
