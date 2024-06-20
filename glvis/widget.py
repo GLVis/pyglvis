@@ -39,7 +39,7 @@ class GlvisWidget(anywidget.AnyWidget):
     is_new_stream = Bool().tag(sync=True)
 
 
-# The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods 
+# The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods
 class glvis:
     def __init__(self, data: Data, width: int = 640, height: int = 480, keys=None):
         self._widget = GlvisWidget()
@@ -76,6 +76,6 @@ class glvis:
         if keys is not None:
             data_string += f"{keys}"
         self._widget.data_str = data_string
-    
+
     def render(self):
         ipydisplay(self)
