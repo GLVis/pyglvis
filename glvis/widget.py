@@ -52,7 +52,7 @@ class GlvisWidget(anywidget.AnyWidget):
 
 # The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods
 class glvis:
-    def __init__(self, data: Data, width: int = 640, height: int = 480, keys=None):
+    def __init__(self, data: Data, width: int=640, height: int=480, keys=None):
         self._widget = GlvisWidget()
         self.set_size(width, height)
         self._sync(data, is_new=True, keys=keys)
@@ -81,11 +81,12 @@ class glvis:
             with open(name, "wb") as f:
                 f.write(base64.decodebytes(data.encode('ascii')))
 
-    def _sync(self, data: Data, is_new: bool = True, keys=None):
+    def _sync(self, data: Data, is_new: bool=True, keys=None):
         self._widget.is_new_stream = is_new
         data_string = data_to_str(data)
         if keys is not None:
-            data_string += f"{keys}"
+            key_string = keys if isinstance(data, str) else f"keys {keys}"
+            data_string += key_string
         self._widget.data_str = data_string
 
     def render(self):
