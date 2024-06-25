@@ -20,7 +20,7 @@ import base64
 try:
     from mfem._ser.mesh import Mesh
     from mfem._ser.gridfunc import GridFunction
-except ImportError:
+except:
     Mesh = object
     GridFunction = object
 
