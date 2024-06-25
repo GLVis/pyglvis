@@ -38,8 +38,17 @@ def data_to_str(data: Data) -> str:
         raise TypeError("Unknown data type")
     return sio.getvalue()
 
-# Import file contents example: https://github.com/juba/pyobsplot/blob/main/src/pyobsplot/widget.py
-class GlvisWidget(anywidget.AnyWidget):
+class _GlvisWidgetCore(anywidget.AnyWidget):
+    """
+    This is the backend that inherits from AnyWidget. Because we don't want all of the AnyWidget
+    properties/methods exposed to the user, the front-end class GlvisWidget is a composition
+    of this object, rather than directly inheriting from AnyWidget.
+
+    _esm must be specified, and is basically a giant string with all of the javascript code required
+    It could be defined as a docstring here, but for organization and syntax highlighting, it is
+    defined in `widget.js`, similar to the organization used by pyobsplot:
+    https://github.com/juba/pyobsplot/blob/main/src/pyobsplot/widget.py
+    """
     _esm = anywidget._file_contents.FileContents(
         Path(__file__).parent / "widget.js", start_thread=False
     )
@@ -50,10 +59,28 @@ class GlvisWidget(anywidget.AnyWidget):
     is_new_stream = Bool().tag(sync=True)
 
 
-# The purpose of this wrapper class is to keep the API of Glvis clean by excluding inherited properties/methods
-class glvis:
+class GlvisWidget:
+    """
+    Front-end class used to interactively visualize data.
+    """
     def __init__(self, data: Data, width: int=640, height: int=480, keys=None):
-        self._widget = GlvisWidget()
+        """
+        Parameters
+        ----------
+        data : Union[Tuple[Mesh, GridFunction], Mesh, str]
+            Data to be visualized. Can consist of the PyMFEM objects: (Mesh, GridFunction) or Mesh,
+            or it can be read directly from a stream/string (see `examples/basic.ipynb`).
+        width : int, optional
+            Width of visualization
+        height : int, optional
+            Height of visualization
+        keys : str, optional
+            Keyboard commands to customize the visualization. Can also be typed into the widget
+            after it is instantiated. For a full list of options, see the GLVis README:
+            https://github.com/GLVis/glvis?tab=readme-ov-file#key-commands
+        """
+
+        self._widget = _GlvisWidgetCore()
         self.set_size(width, height)
         self._sync(data, is_new=True, keys=keys)
 
@@ -91,3 +118,8 @@ class glvis:
 
     def render(self):
         ipydisplay(self)
+
+# Constructor alias
+def glvis(data: Data, width: int=640, height: int=480, keys=None):
+    return GlvisWidget(data, width, height, keys)
+glvis.__doc__ = GlvisWidget.__init__.__doc__

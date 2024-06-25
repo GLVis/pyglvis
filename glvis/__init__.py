@@ -10,6 +10,6 @@
 # CONTRIBUTING.md for details.
 
 from glvis.__about__ import __version__
-from glvis.widget import glvis
+from glvis.widget import glvis, GlvisWidget
 
 __all__ = ["glvis", "GlvisWidget", "__version__"]
