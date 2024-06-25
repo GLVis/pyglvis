@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 dependencies = [
     "mfem>=4.5.2",
-    "anywidget[dev]==0.9.0",
+    "anywidget>=0.9.9",
     "ipywidgets>=8.0.0" # required for _repr_mimebundle_
 ]
 
