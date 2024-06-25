@@ -17,8 +17,12 @@ from typing import Union, Tuple
 from pathlib import Path
 import base64
 
-from mfem._ser.mesh import Mesh
-from mfem._ser.gridfunc import GridFunction
+try:
+    from mfem._ser.mesh import Mesh
+    from mfem._ser.gridfunc import GridFunction
+except ImportError:
+    Mesh = object
+    GridFunction = object
 
 Data = Union[Tuple[Mesh, GridFunction], Mesh, str]
 
