@@ -1,10 +1,10 @@
 # PyGLVis
 
 <!-- Badges generated at https://mybinder.readthedocs.io/en/latest/howto/badges.html -->
-[![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fbasic.ipynb)
-[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fplot.ipynb)
-[![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fex1.ipynb)
-[![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/anywidget?filepath=examples%2Fex9.ipynb)
+[![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
+[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fplot.ipynb)
+[![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex1.ipynb)
+[![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex9.ipynb)
 
 PyGLVis is an interactive [Jupyter](https://jupyter.org/) widget for visualizing finite element meshes and functions, built on-top of the [GLVis](https://glvis.org/) library.
 
