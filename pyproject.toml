@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyglvis"
+dynamic = ["version"]
+description = "GLVis widget for Jupyter notebooks"
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = [
+    "mfem>=4.5.2",
+    "anywidget>=0.9.9",
+    "ipywidgets>=8.0.0" # required for _repr_mimebundle_
+]
+
+[project.urls]
+homepage = "https://glvis.org"
+repostiory = "https://github.com/glvis/pyglvis"
+
+[tool.hatch.version]
+path = "glvis/__about__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["glvis"]
