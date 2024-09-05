@@ -3,14 +3,14 @@ import requests
 class _GlvisData(type):
     _keys = (
     "capacitor", "distance", "ex1", "ex2", "ex27", "ex3", "ex5", "ex9",
-    "klein-bottle", "laghos", "mesh-explorer", "mfem-logo", "minimal-surface",
-    "mobius-strip", "navier", "quad", "quadrature-1D", "quadrature-lor",
+    "klein_bottle", "laghos", "mesh_explorer", "mfem_logo", "minimal_surface",
+    "mobius_strip", "navier", "quad", "quadrature_1D", "quadrature_lor",
     "remhos", "shaper", "shifted", "snake"
     )
 
     @staticmethod
     def _get(key):
-        url = f"https://github.com/GLVis/data/raw/master/streams/{key}.saved"
+        url = f"https://github.com/GLVis/data/raw/master/streams/{key.replace("_","-")}.saved"
         response = requests.get(url)
         # success
         if response.status_code == 200:
