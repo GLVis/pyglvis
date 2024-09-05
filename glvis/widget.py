@@ -89,8 +89,8 @@ class GlvisWidget:
         self._sync(data, is_new=True, keys=keys)
 
     # Automatically renders the widget - necessary because this is a wrapper class
-    def _repr_mimebundle_(self, *args, **kwargs):
-        return self._widget._repr_mimebundle_(*args, **kwargs)
+    def _repr_mimebundle_(self, **kwargs):
+        return self._widget._repr_mimebundle_(**kwargs)
 
     def set_size(self, width: int, height: int):
         self._widget.width = width
