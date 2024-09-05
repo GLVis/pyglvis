@@ -152,7 +152,7 @@ To publish a new version of `glvis-js`, follow the instructions on the [repo](ht
 You will need [twine](https://pypi.org/project/twine/) to publish to PyPI, install with `pip`.
 
 ```
-python setup.py sdist bdist_wheel
+python -m hatch build
 twine upload dist/*
 git tag -a X.X.X -m 'comment'
 git push --tags
