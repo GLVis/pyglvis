@@ -14,7 +14,7 @@ class _GlvisData(type):
         response = requests.get(url)
         # success
         if response.status_code == 200:
-            return response.content.decode('utf-8')
+            return response.content.decode('utf-8').rstrip("\n")
         else:
             print(f"Failed to download data from {url}")
 
