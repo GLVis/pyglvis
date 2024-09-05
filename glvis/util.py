@@ -1,6 +1,6 @@
 import requests
 
-class GlvisData:
+class _GlvisData(type):
     _keys = (
     "capacitor", "distance", "ex1", "ex2", "ex27", "ex3", "ex5", "ex9",
     "klein-bottle", "laghos", "mesh-explorer", "mfem-logo", "minimal-surface",
@@ -27,3 +27,5 @@ class GlvisData:
     def __dir__(self):
         return super().__dir__() + list(self._keys)
 
+class GlvisData(metaclass=_GlvisData):
+    pass
