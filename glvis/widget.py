@@ -26,7 +26,7 @@ except:
 
 Data = Union[Tuple[Mesh, GridFunction], Mesh, str]
 
-def data_to_str(data: Data) -> str:
+def to_stream(data: Data) -> str:
     if isinstance(data, str):
         return data
 
@@ -114,7 +114,7 @@ class GlvisWidget:
 
     def _sync(self, data: Data, is_new: bool=True, keys=None):
         self._widget.is_new_stream = is_new
-        data_string = data_to_str(data)
+        data_string = to_stream(data)
         if keys is not None:
             key_string = keys if isinstance(data, str) else f"keys {keys}"
             data_string += key_string
