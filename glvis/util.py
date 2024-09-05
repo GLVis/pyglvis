@@ -10,7 +10,7 @@ class _GlvisData(type):
 
     @staticmethod
     def _get(key):
-        url = f"https://github.com/GLVis/data/raw/master/streams/{key.replace("_","-")}.saved"
+        url = f"https://github.com/GLVis/data/raw/master/streams/{key.replace('_','-')}.saved"
         response = requests.get(url)
         # success
         if response.status_code == 200:
