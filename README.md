@@ -1,6 +1,6 @@
 # PyGLVis
 
-<a target="_blank" href="https://colab.research.google.com/github/GLVis/pyglvis/blob/update-esm-ref/examples/basic.ipynb">
+<a target="_blank" href="https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/basic.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a> 
 
