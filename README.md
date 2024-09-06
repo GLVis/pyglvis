@@ -1,11 +1,11 @@
 # PyGLVis
 
-<!-- Badges generated at https://mybinder.readthedocs.io/en/latest/howto/badges.html -->
-[![badge](examples/basic.svg "Basic GLVis + Jupyter Example")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fbasic.ipynb)
-[![badge](examples/plot.svg "Plot grid functions")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fplot.ipynb)
-[![badge](examples/ex1.svg "MFEM's Example 1")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex1.ipynb)
-[![badge](examples/ex9.svg "MFEM's Example 9")](https://mybinder.org/v2/gh/GLVis/pyglvis/HEAD?filepath=examples%2Fex9.ipynb)
+<a target="_blank" href="https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/basic.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a> 
 
+
+\
 PyGLVis is an interactive [Jupyter](https://jupyter.org/) widget for visualizing finite element meshes and functions, built on-top of the [GLVis](https://glvis.org/) library.
 
 ## 📦 Installation
@@ -152,7 +152,7 @@ To publish a new version of `glvis-js`, follow the instructions on the [repo](ht
 You will need [twine](https://pypi.org/project/twine/) to publish to PyPI, install with `pip`.
 
 ```
-python setup.py sdist bdist_wheel
+python -m hatch build
 twine upload dist/*
 git tag -a X.X.X -m 'comment'
 git push --tags

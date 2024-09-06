@@ -10,6 +10,7 @@
 # CONTRIBUTING.md for details.
 
 from glvis.__about__ import __version__
-from glvis.widget import glvis, GlvisWidget
+from glvis.widget import to_stream, glvis, GlvisWidget
+from glvis.util import GlvisData
 
-__all__ = ["glvis", "GlvisWidget", "__version__"]
+__all__ = ["to_stream", "glvis", "GlvisWidget", "GlvisData", "__version__"]

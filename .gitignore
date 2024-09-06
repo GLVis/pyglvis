@@ -1,7 +1,6 @@
 .ipynb_checkpoints
 glvis/nbextension
 js/node_modules
-*.ipynb
 *.saved
 *.mesh
 __pycache__

@@ -1,5 +1,0 @@
-# These requirements are _not_ required by glvis but may be needed for the examples.
-# They are required for binder.
-numpy
-scipy
-mfem>=4.3.0.0
