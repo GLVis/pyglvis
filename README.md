@@ -1,8 +1,7 @@
 # PyGLVis
 
-<a target="_blank" href="https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/basic.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a> 
+[![badge](examples/.assets/ex1.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/ex1.ipynb)
+[![badge](examples/.assets/ex9.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/ex9.ipynb)
 
 
 \
