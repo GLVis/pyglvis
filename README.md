@@ -1,7 +1,7 @@
 # PyGLVis
 
-[![badge](examples/.assets/ex1.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/notebook-refs/examples/ex1.ipynb)
-[![badge](examples/.assets/ex9.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/notebook-refs/examples/ex9.ipynb)
+[![badge](examples/.assets/ex1.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/ex1.ipynb)
+[![badge](examples/.assets/ex9.svg)](https://colab.research.google.com/github/GLVis/pyglvis/blob/main/examples/ex9.ipynb)
 
 
 \
