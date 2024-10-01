@@ -9,7 +9,7 @@
 // terms of the BSD-3 license. We welcome feedback and contributions, see file
 // CONTRIBUTING.md for details.
 
-import glvis from "https://esm.sh/gh/glvis/releases-js@release-candidates/v0.3-rc1";
+import glvis from "https://esm.sh/gh/glvis/releases-js@gh-pages/glvis-js-0.3";
 
 function render({ model, el }) {
   let div = document.createElement("div");
