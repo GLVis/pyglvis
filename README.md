@@ -116,12 +116,12 @@ graph TD;
     A --> C[glvis];
     C --> D[glvis-js];
     Ext1[emscripten] --> D;
-    D-.-E["glvis-js\n(npm/esm mirror)"]
+    D-.-E["glvis-js (esm)"]
     B & E --> G[pyglvis];
     Ext2[jupyter] --> G;
 ```
 
-`pyglvis` is most directly depednent on `PyMFEM` and `glvis-js`. [PyMFEM](https://github.com/mfem/pymfem) is a Python wrapper of the finite element library, `MFEM`, while `glvis-js` is a JavaScript/WebAssembly port of `glvis`.
+`pyglvis` is most directly dependent on `PyMFEM` and `glvis-js`. [PyMFEM](https://github.com/mfem/pymfem) is a Python wrapper of the finite element library, `MFEM`, while `glvis-js` is a JavaScript/WebAssembly port of `glvis`.
 
 `glvis-js` is hosted on [github](https://github.com/glvis/glvis-js) and mirrored on [npm](https://www.npmjs.com/package/glvis). [esm.sh](https://esm.sh/glvis) allows `pyglvis` to pull the latest version of `glvis-js` directly from npm. This can be seen in the first line of [glvis/widget.js](glvis/widget.js):
 
